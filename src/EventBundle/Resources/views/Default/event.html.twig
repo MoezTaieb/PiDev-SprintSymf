@@ -1,0 +1,63 @@
+{% extends 'baseback.html.twig' %}
+{% block body %}
+    <h3 class="title1">List of events</h3>
+    <div class="grid-bottom widget-shadow">
+
+        <form action="{{ path("AjoutE") }}">
+
+            <input type="submit" class="btn btn-primary btn-flat btn-pri btn-lg" value="Ajouter un Evenement" />
+
+        </form>
+           <table class="table table-bordered table-striped no-margin grd_tble">
+
+            <thead>
+            <tr>
+
+                <th>
+                 Nom evenements
+                </th>
+
+                <th>
+                    Lieu evenements
+                </th>
+                <th>
+                  Date evenements
+                </th>
+                <th>
+                   Nombre Max Participant
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for e in ev %}
+            <tr>
+                <th>{{ e.nomEvenement }}</th>
+
+
+                <th>{{e.lieuEvenement}}</th>
+
+
+                <th>{{ e.dateEvenement |date('Y-m-d') }}</th>
+
+
+                <th>{{e.nombreMaxParticipant}}</th>
+                <form action="{{ path("ModifierEvent",{'id' : e.id}) }}">
+                <th><input type="submit" class="btn btn-info" value="modifier cet Evenement"/></th>
+                </form>
+                <th>
+                    <form action="{{ path("SuppEvent",{'id' : e.id}) }}">
+
+                        <input type="submit" class="btn btn-danger" value="Supprimer cet Evenement" />
+
+                    </form> </th>
+
+
+            </tr>
+             {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}

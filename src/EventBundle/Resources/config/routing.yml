@@ -1,0 +1,15 @@
+event:
+    path:     /event
+    defaults: {_controller: EventBundle:Default:index }
+
+AjoutE:
+    path:     /AjoutEv
+    defaults: {_controller: EventBundle:Default:ajouterEvent }
+
+SuppEvent:
+    path:     /supprimer/{id}
+    defaults: { _controller: EventBundle:Default:supprimerEvent }
+
+ModifierEvent:
+    path:     /ModifierE/{id}
+    defaults: { _controller: EventBundle:Default:updateEvent }
