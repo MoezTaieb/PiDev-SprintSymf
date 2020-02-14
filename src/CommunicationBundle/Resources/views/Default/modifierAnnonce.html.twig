@@ -1,0 +1,66 @@
+{% extends 'baseDashboradUser.html.twig' %}
+
+{% block body %}
+
+    <div class="dashboard-list">
+        <h3 class="heading">Basic Info</h3>
+        <div class="dashboard-message contact-2 bdr clearfix">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-3">
+                    <!-- Edit profile photo -->
+                    <div class="edit-profile-photo">
+                        {% if annonce.imageUrlAnnonce==null %}
+                            <img src="{{ asset("front/img/logo-4.png") }}" alt="company-logo" class="img-fluid">
+                        {% else %}
+                            <img src="{{  '/uploads/brochures/'~annonce.imageUrlAnnonce }}" alt="company-logo" class="img-fluid">
+
+                        {% endif%}                        <div class="change-photo-btn">
+                            <div class="photoUpload">
+                                <span><i class="fa fa-upload"></i></span>
+                                {{ form_start(form) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-9">
+
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group name">
+                                {{ form_label(form.titreAnnonce, "Ad Title") }}
+                                {{  form_widget(form.titreAnnonce ,{'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group mb-0 message">
+                                {{  form_label(form.descriptionAnnonce, "Ad Description") }}
+                                {{  form_widget(form.descriptionAnnonce ,{'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group name">
+
+                            </div>
+                        </div>
+
+                        {{  form_row(form.brochure ) }}
+
+                        <button type="submit" class="btn btn-md button-theme">publish ad</button>
+                    </div>
+
+
+                    {{ form_end(form) }}
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock%}
+

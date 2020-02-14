@@ -1,0 +1,201 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'smalBanner.html.twig' %}
+
+    <div class="employer-details-page content-area employer-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12">
+                <!-- Employer box 2 start -->
+                <div class="employer-box-2 clearfix">
+                    <div class="employer-photo">
+
+                        {%  if 	annonce.posteur.imageUrlUser==null %}
+                            <img src="{{ asset('front/img/user.png') }}" >
+
+
+                        {% else %}
+                            <img src="{{ annonce.posteur.imageUrlUser }}" >
+
+                        {% endif %}
+                        <h6>{{annonce.posteur.username }}</h6>
+
+                    </div>
+                    <div class="employer-info align-self-center">
+                        <div class="float-left">
+                            <h5 class="title"><a href="#">{{annonce.titreAnnonce}}</a></h5>
+                            <div class="candidate-listing-footer">
+                                <ul>
+
+                                    <li><i class="flaticon-work"></i> created at: {{annonce.dateAnnonce | date("m/d/Y h:m") }} </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="hr-boder clearfix">
+                <div class="clearfix"></div>
+                <div class="video mb-50">
+                    {%  if 	annonce.imageUrlAnnonce!=null %}
+                        <img class="img-fluid" style="  max-width: 730px;max-height: 730px"  src="{{  '/uploads/brochures/'~annonce.imageUrlAnnonce }}" >
+                    {% else %}
+
+                    {% endif %}
+                </div>
+                <!-- About start -->
+                <div class="about mb-40">
+                    <h3 class="heading-2">Description</h3>
+                    <p> {{annonce.descriptionAnnonce }} </p>
+                    <!--
+                    <div class="amenities">
+                        <ul>
+                            <li>
+                                <i class="fa fa-check"></i>Cross-browser and platform testing as standard practice
+                            </li>
+                            <li><i class="fa fa-check"></i>Experience using Invision a plus</li>
+                            <li>
+                                <i class="fa fa-check"></i>Experience in video production a plus or, at a minimum, a willingness to learn
+                            </li>
+                        </ul>
+                    </div>
+
+                    <p>Repeatedly dreamed alas opossum but dramatically despite expeditiously that jeepers loosely yikes that as or eel underneath kept and slept compactly far purred sure abidingly up above fitting to strident wiped set waywardly far the and pangolin.</p>
+              -->
+                </div>
+                <!-- video start -->
+
+                <!-- Related jobs start -->
+                <div class="related-Jobs clearfix">
+                    <h3 class="heading-2">Comments</h3>
+                    {% for comment in annonce.comments %}
+                    <div     class="job-box">
+                        <div class="company-logo">
+                            {%  if 	comment.commentateur.imageUrlUser==null %}
+                                <img src="{{ asset('front/img/user.png') }}" >
+
+                            {% else %}
+                                <img src="{{ comment.commentateur.imageUrlUser }}" >
+
+                            {% endif %}
+                            <h6>
+                                {{comment.commentateur.username }}
+                            </h6>
+                        </div>
+                        <div class="description">
+                            <div class="float-left">
+
+
+                                {{ comment.contenuCommentaire }}
+
+                                <div class="candidate-listing-footer">
+                                    <h6>
+                                        created at: {{comment.dateCommentaire | date("m/d/Y h:m") }}
+                                    </h6>
+                                </div>
+
+                            </div>
+                            <div class="div-right">
+                                {% if user.id ==comment.commentateur.id  %}
+
+                                <a href="{{ path('deleteComment', {id: comment.id}) }}"><i class="fa fa-trash favourite "></i></a>
+                                <a   href="{{ path('editComment', {id: comment.id}) }}" ><i class="fa fa-edit favourite"></i></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+                    <div class="job-box">
+                        <div class="company-logo">
+
+                            {%  if 	user.imageUrlUser==null %}
+                                <img src="{{ asset('front/img/user.png') }}" >
+
+                            {% else %}
+                                <img src="{{user.imageUrlUser}}" >
+
+                            {% endif %}
+                            <h6>{{user.username }}</h6>
+                        </div>
+                        <div class="description">
+                            {{ form_start(form) }}
+                                <div class="form-group">
+                                    <div class="col-lg-10">
+
+                                        {{  form_widget(form.contenuCommentaire ,{'attr': {'class': 'form-control','id':'addComment', 'placeholder':'Write your comment'}}) }}
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+
+                                        <button   class="search-button button-theme text-uppercase"  type="submit" id="submitComment"><span class="glyphicon glyphicon-send"></span> Summit comment</button>
+                                    </div>
+                                </div>
+                                {{ form_end(form) }}
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+            </div>
+            <div class="col-lg-4 col-md-12">
+
+
+                <div class="sidebar-right-2">
+                    <div class="widget">
+                        <form method="GET">
+                            <div class="form-group mb-0">
+                                <button class="search-button button-theme"> send messages </button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Job overview start -->
+                    <div class="job-overview widget">
+                        <h3 class="sidebar-title">Ad Options</h3>
+                        <div class="s-border"></div>
+                        <ul>
+                            <li><a  href="{{ path('addAd', {id: annonce.id}) }}" ><i class="flaticon-honor"></i><h5>Publish New Ad</h5><span> <br></span></a></li>
+                            {% if user.id ==annonce.posteur.id %}
+                            <li><a  href="{{ path('editAd', {id: annonce.id}) }}" ><i class="fa fa-edit"></i><h5>Edit This Ad</h5><span><br> </span></a></li>
+                            <li><a  href="{{ path('deleteAd', {id: annonce.id}) }}" ><i class="fa fa-trash"></i><h5>Delete This Ad</h5><span> <br></span></a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- Quick contact start -->
+                    <div class="widget-5 contact-2 quick-contact">
+                        <h3 class="sidebar-title">Quick Contacts</h3>
+                        <div class="s-border"></div>
+                        <form action="#" method="GET" enctype="multipart/form-data">
+                            <div class="form-group name">
+                                <input type="text" name="name" class="form-control" placeholder="Name">
+                            </div>
+                            <div class="form-group email">
+                                <input type="email" name="email" class="form-control" placeholder="Email">
+                            </div>
+                            <div class="form-group message">
+                                <textarea class="form-control" name="message" placeholder="Write email"></textarea>
+                            </div>
+                            <div class="send-btn">
+                                <button type="submit" class="btn btn-md button-theme">Send Email</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock%}

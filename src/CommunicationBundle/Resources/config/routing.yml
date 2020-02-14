@@ -1,0 +1,35 @@
+a:
+    path:     /ajoutannonce
+    defaults: { _controller: CommunicationBundle:Default:index }
+consulerannonce:
+    path:     /consulerannonce
+    defaults: { _controller: CommunicationBundle:Annonce:index }
+
+
+showDetails:
+    path:     /showDetails/{id}
+    defaults: { _controller: CommunicationBundle:Annonce:showDetails }
+
+deleteAd:
+    path:     /deleteAd/{id}
+    defaults: { _controller: CommunicationBundle:Annonce:deleteAd }
+
+addAd:
+    path:     /addAd
+    defaults: { _controller: CommunicationBundle:Annonce:new }
+editAd:
+    path:     /editAd/{id}
+    defaults: { _controller: CommunicationBundle:Annonce:edit }
+deleteComment:
+    path:     /deleteComment/{id}
+    defaults: { _controller: CommunicationBundle:Commentaire:deleteComment }
+editComment:
+    path:     /editComment/{id}
+    defaults: { _controller: CommunicationBundle:Commentaire:editComment }
+
+
+
+
+
+
+
