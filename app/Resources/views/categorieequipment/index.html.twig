@@ -1,0 +1,39 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block body %}
+    <h1>Categorieequipments list</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom categorie</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorieEquipment in categorieEquipments %}
+            <tr>
+                <td><a href="{{ path('categorieequipment_show', { 'id': categorieEquipment.id }) }}">{{ categorieEquipment.id }}</a></td>
+                <td>{{ categorieEquipment.nomCategorie }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('categorieequipment_show', { 'id': categorieEquipment.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('categorieequipment_edit', { 'id': categorieEquipment.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('categorieequipment_new') }}">Create a new categorieEquipment</a>
+        </li>
+    </ul>
+{% endblock %}

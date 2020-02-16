@@ -1,0 +1,28 @@
+equipment_index:
+    path:     /
+    defaults: { _controller: "DonBundle:Equipment:index" }
+    methods:  GET
+
+equipment_show:
+    path:     /{id}/show
+    defaults: { _controller: "DonBundle:Equipment:show" }
+    methods:  GET
+
+equipment_new:
+    path:     /new
+    defaults: { _controller: "DonBundle:Equipment:new" }
+    methods:  [GET, POST]
+
+equipment_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DonBundle:Equipment:edit" }
+    methods:  [GET, POST]
+
+equipment_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DonBundle:Equipment:delete" }
+    methods:  DELETE
+equipment_imp:
+    path:     /imp
+    defaults: { _controller: "DonBundle:Equipment:imp" }
+    methods:  GET

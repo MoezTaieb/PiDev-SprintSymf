@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Equipment</h1>
+
+    <table class="table">
+        <tbody>
+
+            <tr>
+                <th>Id</th>
+                <td>{{ equipment.id }}</td>
+            </tr>
+            <tr>
+                <th>Nomequipment</th>
+                <td>{{ equipment.nomEquipment }}</td>
+            </tr>
+            <tr>
+                <th>Etatequipment</th>
+                <td>{{ equipment.etatEquipment }}</td>
+            </tr>
+            <tr>
+                <th>Datedonequipment</th>
+                <td>{% if equipment.dateDonEquipment %}{{ equipment.dateDonEquipment|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+
+        <li>
+            <a href="{{ path('equipment_edit', { 'id': equipment.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+
+{% endblock %}

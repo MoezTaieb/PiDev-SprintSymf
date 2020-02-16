@@ -1,0 +1,27 @@
+don_categorieequipment:
+    resource: "@DonBundle/Resources/config/routing/categorieequipment.yml"
+    prefix:   /categorieequipment
+
+event:
+    path:     /event
+    defaults: { _controller: EventBundle:Default:index }
+
+
+don_equipment:
+    resource: "@DonBundle/Resources/config/routing/equipment.yml"
+    prefix:   /equipment
+don_service:
+    resource: "@DonBundle/Resources/config/routing/service.yml"
+    prefix:   /service
+don_categorieservice:
+    resource: "@DonBundle/Resources/config/routing/categorieservice.yml"
+    prefix:   /categorieservice
+accepter:
+    path:     /accepter/{id}
+    defaults: { _controller:DonBundle:Equipment:Accepterequipment}
+refuser:
+    path:     /refuser/{id}
+    defaults: { _controller: DonBundle:Equipment:Refuserequipment}
+traiter:
+    path:     /traiter
+    defaults: { _controller: DonBundle:Equipment:Traiterequipment}

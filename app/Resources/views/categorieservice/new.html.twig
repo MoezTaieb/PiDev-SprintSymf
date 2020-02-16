@@ -1,0 +1,20 @@
+{% extends 'baseback.html.twig' %}
+
+{% block body %}
+    =
+<h4>Categorie equipment creation :</h4>
+</div>
+<div class="form-body" data-example-id="simple-form-inline">
+
+    <div class="form-group">
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('categorieservice_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

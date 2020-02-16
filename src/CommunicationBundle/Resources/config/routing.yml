@@ -1,0 +1,6 @@
+a:
+    path:     /ajoutannonce
+    defaults: { _controller: CommunicationBundle:Default:index }
+consulerannonce:
+    path:     /consulerannonce
+    defaults: { _controller: CommunicationBundle:Default:consulerannonce }

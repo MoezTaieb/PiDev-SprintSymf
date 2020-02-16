@@ -1,0 +1,36 @@
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        window.print();
+    });
+
+</script>
+<table class="table">
+
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Nom equipment</th>
+        <th>Etat equipment</th>
+        <th>Date don equipment</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for equipment in equipment %}
+        <tr>
+            <td><a href="{{ path('equipment_show', { 'id': equipment.id }) }}">{{ equipment.id }}</a></td>
+            <td>{{ equipment.nomEquipment }}</td>
+            <td>{{ equipment.etatEquipment }}</td>
+            <td>{% if equipment.dateDonEquipment %}{{ equipment.dateDonEquipment|date('Y-m-d H:i:s') }}{% endif %}</td>
+
+
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

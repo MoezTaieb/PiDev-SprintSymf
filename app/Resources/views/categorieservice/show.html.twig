@@ -1,0 +1,39 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block body %}
+
+
+
+<div class="form-body" data-example-id="simple-form-inline">
+
+
+            <h2 class="title1"></h2>
+            <div class="form-group" >
+                <h4>Categorie service</h4>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nomcategorie</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>{{ categorieService.id }}</th>
+                        <th>{{ categorieService.nomCategorie }}</th>
+
+                    </tr>
+
+                    </tbody>
+                    </table>
+            </div>
+
+                    <a href="{{ path('categorieservice_index') }}">Back to the list</a><br>
+
+                    <a href="{{ path('categorieservice_edit', { 'id': categorieService.id }) }}">Edit</a>
+
+                {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+                {{ form_end(delete_form) }}
+{% endblock %}
