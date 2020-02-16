@@ -1,0 +1,37 @@
+{% extends 'baseback.html.twig' %}
+
+{% block body %}
+
+
+
+    <div class="col-sm-8" xmlns=""><b><h1>Camps list</h1></b></div>
+    <div class="col-sm-4">
+        <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i><a href="{{ path('camp_new') }}"> Add New</a></button>
+    </div>
+    <br><br><br><br>
+    <table class="table">
+        <thead>
+        <th >Id</th>
+        <th >Nom</th>
+        <th>Adresse</th>
+        <th>Actions</th>
+        </thead>
+        <tbody>
+        {% for camp in camps %}
+            <tr>
+                <th scope="row"><a href="{{ path('camp_show', { 'id': camp.id }) }}">{{ camp.id }}</a></th>
+
+                <td>{{ camp.nomCamp }}</td>
+                <td>{{ camp.adresseCamp }}</td>
+                <td>
+                    <button type="button" class="btn btn-secondary"> <a href="{{ path('camp_edit', { 'id': camp.id }) }}">Edit</a></button>
+                    <button type="button" class="btn btn-danger"><a href="{{ path('camp_delete', { 'id': camp.id }) }}">Delete</a></button>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

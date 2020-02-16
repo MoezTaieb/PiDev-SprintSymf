@@ -1,0 +1,45 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        window.print();
+    });
+
+</script>
+<table class="table">
+
+    <thead>
+    <th>Id</th>
+    <th>Nom</th>
+    <th>Prenom</th>
+    <th>Adresse</th>
+    <th>Tel</th>
+    <th>Num passport</th>
+    <th>Nationalite</th>
+    <th>Image url</th>
+    <th>Actions</th>
+    </thead>
+    <tbody>
+    {% for refugie in refugies %}
+
+        <tr>
+            <th scope="row"><a href="{{ path('refugie_show', { 'id': refugie.id }) }}">{{ refugie.id }}</a></th>
+
+            <td>{{ refugie.nomRefugie }}</td>
+            <td>{{ refugie.prenomRefugie }}</td>
+            <td>{{ refugie.adresseRefugie }}</td>
+            <td>{{ refugie.telRefugie }}</td>
+            <td>{{ refugie.numassportRefugie }}</td>
+            <td>{{ refugie.nationaliteRefugie }}</td>
+            <td>{{ refugie.imageUrlRefugie }}</td>
+
+        </tr>
+
+    {% endfor %}
+
+
+    </tbody>
+</table>
