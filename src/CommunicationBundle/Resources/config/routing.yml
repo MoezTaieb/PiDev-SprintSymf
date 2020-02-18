@@ -27,9 +27,9 @@ editComment:
     path:     /editComment/{id}
     defaults: { _controller: CommunicationBundle:Commentaire:editComment }
 
-
-
-
-
-
-
+ajax_search:
+    path:     /search
+    defaults: { _controller: CommunicationBundle:Annonce:search }
+search:
+    path:     /sear
+    defaults: { _controller: CommunicationBundle:Annonce:searchlist }

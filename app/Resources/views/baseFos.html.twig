@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="zxx">
+<!-- Copied from http://storage.googleapis.com/themevessel-products/jobb/index.html by Cyotek WebCopy 1.7.0.600, samedi 8 février 2020, 11:02:37 -->
+<head>
+    <title>JOBB - Job Board HTML Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+
+    <!-- External CSS libraries -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/animate.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/bootstrap-submenu.css')}}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/bootstrap-select.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/magnific-popup.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/daterangepicker.css')}}">
+    <link rel="stylesheet" href="css/leaflet.css" type="text/css">
+    <link rel="stylesheet" href="css/map.css" type="text/css">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/fonts/font-awesome/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/fonts/flaticon/font/flaticon.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/fonts/linearicons/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/jquery.mCustomScrollbar.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/dropzone.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/slick.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/fontawesome-all.min')}}">
+
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/style.css')}}">
+    <link rel="stylesheet" type="text/css" id="style_sheet" href="{{ asset('front/css/skins/midnight-blue.css')}}">
+
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" href="{{ asset('front/img/favicon.ico')}}" type="image/x-icon">
+
+    <!-- Google fonts -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,300,700">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Dosis%7CMontserrat:200,300,400,500,600,700,800,900%7CNunito+Sans:200,300,400,600,700,800,900">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/ie10-viewport-bug-workaround.css')}}">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script  src="{{ asset('front/js/ie8-responsive-file-warning.js')}}"></script><![endif]-->
+    <script src="{{ asset('front/js/ie-emulation-modes-warning.js')}}"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script  src="{{ asset('front/js/html5shiv.min.js')}}"></script>
+    <script  src="{{ asset('front/js/respond.min.js')}}"></script>
+    <![endif]-->
+</head>
+<div class="page_loader"></div>
+
+<!-- Main header start -->
+<!-- Main header end -->
+<ul class="nav" id="side-menu">
+    <li>
+        <a href="#"> Entities<span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level" id="entitiesNav">
+        </ul>
+    </li>
+</ul><br><br><br><br>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<div class="sidebar-search">
+
+    <div class="input-group custom-search-form">
+
+        <label for="search"></label><input type="text" id="search" class="form-control" placeholder="Search here">
+    </div>
+    <!-- /input-group -->
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        var searchRequest = null;
+        $("#search").keyup(function() {
+            var minlength = 1;
+            var that = this;
+            var value = $(this).val();
+            var entitySelector = $("#entitiesNav").html('');
+            if (value.length >= minlength ) {
+                if (searchRequest != null)
+                    searchRequest.abort();
+                searchRequest = $.ajax({
+                    type: "GET",
+                    url: "{{ path('ajax_search') }}",
+                    data: {
+                        'q' : value
+                    },
+                    dataType: "text",
+                    success: function(msg){
+                        //we need to check if the value is the same
+                        if (value===$(that).val()) {
+                            var result = JSON.parse(msg);
+                            console.log(result);
+                            $.each(result, function(key, arr) {
+                                $.each(arr, function(id, value) {
+
+                                        if (id !== 'error') {
+                                            entitySelector.append('<li><br>'+value["titre"]+'<a></a></li>');
+
+                                        } else {
+                                            entitySelector.append('<li class="errorLi">'+value+'</li> ');
+                                        }
+
+                                });
+                            });
+                        }
+                    }
+
+                });
+            }
+        });
+    });
+</script>
+
+
+
+
+
+{% block body %}
+{% endblock%}
+<h2>Search A Post !!</h2>
+
+
+
+
+
+
+<script src="{{ asset('front/js/jquery-2.2.0.min.js')}}"></script>
+<script src="{{ asset('front/js/popper.min.js')}}"></script>
+<script src="{{ asset('front/js/bootstrap.min.js')}}"></script>
+<script src="{{ asset('front/js/bootstrap-submenu.js')}}"></script>
+<script src="{{ asset('front/js/rangeslider.js')}}"></script>
+<script src="{{ asset('front/js/jquery.mb.YTPlayer.js')}}"></script>
+<script src="{{ asset('front/js/bootstrap-select.min.js')}}"></script>
+<script src="{{ asset('front/js/jquery.easing.1.3.js')}}"></script>
+<script src="{{ asset('front/js/jquery.scrollUp.js')}}"></script>
+<script src="{{ asset('front/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
+<script src="{{ asset('front/js/leaflet.js')}}"></script>
+<script src="{{ asset('front/js/leaflet-providers.js')}}"></script>
+<script src="{{ asset('front/js/leaflet.markercluster.js')}}"></script>
+<script src="{{ asset('front/js/moment.min.js')}}"></script>
+<script src="{{ asset('front/js/daterangepicker.min.js')}}"></script>
+<script src="{{ asset('front/js/dropzone.js')}}"></script>
+<script src="{{ asset('front/js/slick.min.js')}}"></script>
+<script src="{{ asset('front/js/jquery.filterizr.js')}}"></script>
+<script src="{{ asset('front/js/jquery.magnific-popup.min.js')}}"></script>
+<script src="{{ asset('front/js/jquery.countdown.js')}}"></script>
+<script src="{{ asset('front/js/maps.js')}}"></script>
+<script src="{{ asset('front/js/app.js')}}"></script>
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="{{ asset('front/js/ie10-viewport-bug-workaround.js')}}"></script>
+<!-- Custom javascript -->
+<script src="{{ asset('front/js/ie10-viewport-bug-workaround.js')}}"></script>
+</body>
+<!-- Copied from http://storage.googleapis.com/themevessel-products/jobb/index.html by Cyotek WebCopy 1.7.0.600, samedi 8 février 2020, 11:02:37 -->
+</html>

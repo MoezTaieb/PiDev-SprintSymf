@@ -8,6 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Response;
+
+
 /**
  * Annonce controller.
  *
@@ -30,6 +33,18 @@ class AnnonceController extends Controller
             'annonces' => $annonces,
         ));
     }
+
+    public function searchlistAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $annonces = $em->getRepository('CommunicationBundle:Annonce')->findAll();
+
+        return $this->render('@Communication/Default/search.html.twig', array(
+            'annonces' => $annonces,
+        ));
+    }
+
 
 
     /**
@@ -226,4 +241,31 @@ class AnnonceController extends Controller
 
     }
 
+
+    public function searchAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $requestString = $request->get('q');
+
+        $entities =  $em->getRepository('CommunicationBundle:Annonce')->findEntitiesByString($requestString);
+
+        if(!$entities) {
+            $result['entities']['error'] = "keine Einträge gefunden";
+        } else {
+            $result['entities'] = $this->getRealEntities($entities);
+        }
+
+        return new Response(json_encode($result));
+    }
+
+    public function getRealEntities($entities){
+        foreach ($entities as $entity){
+            $realEntities[$entity->getId()] =["username"=>$entity->getPosteur()->getUsername(),"imageUrlUser"=>$entity->getPosteur()->getImageUrlUser(),"id"=>$entity->getId(),"titre"=>$entity->getTitreAnnonce(),"desc"=>$entity->getDescriptionAnnonce(),"img"=>$entity->getImageUrlAnnonce(),"DateAnnonce"=>$entity->getDateAnnonce()];
+
+        }
+
+        return $realEntities;
+
+    }
 }

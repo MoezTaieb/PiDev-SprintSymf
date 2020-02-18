@@ -4,6 +4,7 @@ namespace CommunicationBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Annonce
@@ -77,6 +78,11 @@ class Annonce
      * @var string
      *
      * @ORM\Column(name="titreAnnonce", type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      minMessage = "Your title must be at least {{ limit }} characters long",
+     * )
      */
     private $titreAnnonce;
 
@@ -84,6 +90,11 @@ class Annonce
      * @var string
      *
      * @ORM\Column(name="descriptionAnnonce", type="text")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      minMessage = "Your description must be at least {{ limit }} characters long",
+     * )
      */
     private $descriptionAnnonce;
 
@@ -183,7 +194,6 @@ class Annonce
     {
         return $this->imageUrlAnnonce;
     }
-
     /**
      * Set dateAnnonce
      *

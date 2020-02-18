@@ -1,0 +1,44 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+<!-- Contact section start -->
+<div class="contact-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Form content box start -->
+                <div class="form-content-box">
+                    <!-- details -->
+                    <div class="details">
+                        <!-- Logo -->
+                        <a href="index.html">
+                            <img src="{{ asset('front/img/logos/logos.png')}}" class="cm-logo" alt="black-logo">
+                        </a>
+                        <!-- Name -->
+                        <h3>Create an account</h3>
+
+
+
+
+                        {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+                        {{ form_widget(form) }}
+                        <div>
+                            <input type="submit" value="{{ 'registration.submit'|trans }}" />
+                        </div>
+                        {{ form_end(form) }}
+
+                        <!-- Social List -->
+                    </div>
+                    <!-- Footer -->
+                    <div class="footer">
+                        <span>Don't have an account? <a href="signup.html">Login</a></span>
+                    </div>
+                </div>
+                <!-- Form content box end -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact section end -->
+
+<

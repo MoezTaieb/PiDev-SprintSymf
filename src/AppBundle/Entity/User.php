@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use FOS\MessageBundle\Model\ParticipantInterface;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,8 +11,15 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
  */
-class User extends BaseUser
+class User extends BaseUser implements ParticipantInterface
 {
+    /**
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")

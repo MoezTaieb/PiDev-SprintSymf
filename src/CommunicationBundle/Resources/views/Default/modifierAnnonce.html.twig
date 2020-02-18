@@ -31,6 +31,10 @@
                             <div class="form-group name">
                                 {{ form_label(form.titreAnnonce, "Ad Title") }}
                                 {{  form_widget(form.titreAnnonce ,{'attr': {'class': 'form-control'}}) }}
+                                <div class="my-custom-class-for-errors">
+                                    {{ form_errors(form.titreAnnonce) }}
+
+                                </div>
                             </div>
                         </div>
 
@@ -38,6 +42,10 @@
                             <div class="form-group mb-0 message">
                                 {{  form_label(form.descriptionAnnonce, "Ad Description") }}
                                 {{  form_widget(form.descriptionAnnonce ,{'attr': {'class': 'form-control'}}) }}
+                                <div class="my-custom-class-for-errors">
+                                    {{ form_errors(form.descriptionAnnonce) }}
+
+                                </div>
                             </div>
                         </div>
 

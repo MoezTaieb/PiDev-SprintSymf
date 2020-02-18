@@ -126,7 +126,10 @@
                                     <div class="col-lg-10">
 
                                         {{  form_widget(form.contenuCommentaire ,{'attr': {'class': 'form-control','id':'addComment', 'placeholder':'Write your comment'}}) }}
+                                        <div class="my-custom-class-for-errors">
+                                            {{ form_errors(form.contenuCommentaire) }}
 
+                                        </div>
                                     </div>
                                 </div>
 

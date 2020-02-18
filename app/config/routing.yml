@@ -26,3 +26,6 @@ app:
     type: annotation
     prefix:   /home
 
+fos_message:
+    resource: "@FOSMessageBundle/Resources/config/routing.xml"
+    prefix: /mes

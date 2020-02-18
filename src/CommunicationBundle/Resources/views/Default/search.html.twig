@@ -1,0 +1,140 @@
+
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+
+
+    <div class="listing-section content-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-12">
+                    <div class="sidebar-right">
+                        <!-- Advanced search start -->
+                        <div class="widget-4 advanced-search">
+                                <div class="informeson"class="form-group">
+                                    <label>Keywords</label>
+                                    <input type="text" id="search" class="form-control selectpicker search-fields" placeholder="Search Keywords">
+                                </div>
+
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-12" id="#list">
+                    <!-- Option bar start -->
+                    <div class="option-bar d-none d-xl-block d-lg-block d-md-block d-sm-block">
+                        <div class="row" id="entitiesNav">
+                            <div class="col-lg-6 col-md-7 col-sm-7">
+                                <div class="sorting-options2">
+                                    <span class="sort">Sort by:</span>
+                                    <select class="selectpicker search-fields" name="default-order">
+                                        <option>Relevance</option>
+                                        <option>Newest</option>
+                                        <option>Oldest</option>
+                                        <option>Random</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div >
+
+
+                            </div>
+                            <ul class="nav nav-second-level" >
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Emplayer box start -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            var searchRequest = null;
+            $("#search").keyup(function() {
+                var minlength = 1;
+                var that = this;
+                var value = $(this).val();
+                var entitySelector = $("#entitiesNav").html('');
+                if (value.length >= minlength ) {
+                    if (searchRequest != null)
+                        searchRequest.abort();
+                    searchRequest = $.ajax({
+                        type: "GET",
+                        url: "{{ path('ajax_search') }}",
+                        data: {
+                            'q' : value
+                        },
+                        dataType: "text",
+                        success: function(msg){
+                            //we need to check if the value is the same
+                            if (value===$(that).val()) {
+                                var result = JSON.parse(msg);
+                                console.log(result);
+                                $.each(result, function(key, arr) {
+                                    $.each(arr, function(id, value) {
+
+                                        if (id !== 'error') {
+
+                                           // entitySelector.append('<li><br>+value["titre"]+'<a></a></li>');
+
+
+                                            if(value["imageUrlUser"]!==null)
+                                                var src=value["imageUrlUser"];
+                                            else
+                                                var src="front/img/user.png";
+
+
+
+                                            /*   if(annonce.posteur.imageUrlUser==null)
+                                                   front/img/user.png
+
+                                               else
+                                                   annonce.posteur.imageUrlUser
+
+
+                                               annonce.posteur.username
+
+                                               path('showDetails', {id: annonce.id})*/
+
+                                         var path=' href="/showDetails/'+value["id"]+'" ';
+                                          var descriptionAnnonce=value["desc"].substr(0, 140);
+                                        entitySelector.append('  <div class="employer-box">  <div class="employer-photo"><a> <img src="'+src+'"> </a></div><div class="employer-info"><h5><a'+path+'>'+value["titre"]+'</a></h5><div class="employer-meta"> <h6> '+value["username"]+' </h6></div>'+descriptionAnnonce+'<p></p></div></div>');
+                                           // entitySelector.append('<li><br>'+value["titre"]+'<a></a></li>');
+
+
+
+
+
+                                        } else {
+                                            entitySelector.append('<li class="errorLi">'+value+'</li> ');
+                                        }
+
+                                    });
+                                });
+                            }
+                        }
+
+                    });
+                }
+            });
+        });
+    </script>
+
+{% endblock%}
+
+
+

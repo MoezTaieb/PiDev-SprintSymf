@@ -3,6 +3,7 @@
 namespace CommunicationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Commentaire
@@ -73,6 +74,11 @@ class Commentaire
      * @var string
      *
      * @ORM\Column(name="contenuCommentaire", type="text")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      minMessage = "Your comment must be at least {{ limit }} characters long",
+     * )
      */
     private $contenuCommentaire;
 
