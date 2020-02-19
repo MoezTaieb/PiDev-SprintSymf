@@ -1,0 +1,80 @@
+{% extends 'baseback.html.twig' %}
+{% block body %}
+    <h3 class="title1">List of events</h3>
+    <div class="grid-bottom widget-shadow">
+
+        <form action="{{ path("AjoutE") }}">
+
+            <input type="submit" class="btn btn-primary btn-flat btn-pri btn-lg" value="Ajouter un Evenement" />
+
+        </form>
+
+        <table class="table table-bordered table-striped no-margin grd_tble">
+
+            <thead>
+            <tr>
+
+                <th>
+                    Nom evenements
+                </th>
+
+                <th>
+                    Lieu evenements
+                </th>
+                <th>
+                    Date evenements
+                </th>
+                <th>
+                    Nombre Max Participant
+                </th>
+                <th> Affiche de l'evenement </th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for e in ev %}
+                <tr>
+                    <th>{{ e.nomEvenement }}</th>
+
+
+                    <th>{{e.lieuEvenement}}</th>
+
+
+                    <th>{{ e.dateEvenement |date('Y-m-d') }}</th>
+
+
+                    <th>{{e.nombreMaxParticipant}}</th>
+                    <th> <img src="{{ asset('uploads/images/') ~ e.image }}" width="80" height="80"></th>
+                    <form action="{{ path("ModifierEvent",{'id' : e.id}) }}">
+                        <th><input type="submit" class="btn btn-info" value="mod Event"/></th>
+                    </form>
+                    <th>
+                        <form action="{{ path("SuppEvent",{'id' : e.id}) }}">
+
+                            <input type="submit" class="btn btn-danger" value="Supp Event" onclick="return confirm('are u sure?')" />
+
+                        </form> </th>
+                    <th>
+                        <form action="{{ path("AjoutInvit",{'id' : e.id}) }}">
+                            <input type="submit" class="btn btn-outline-danger" value="Ajout invit"/>
+                        </form>
+                    </th>
+                    <th>
+                    <form action="{{ path("AffInvit",{'id' : e.id}) }}">
+                        <input type="submit" class="btn btn-outline-danger" value=" invités"/>
+                    </form>
+                    </th>
+
+
+
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}

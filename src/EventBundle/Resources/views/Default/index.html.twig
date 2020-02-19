@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="blog content-area">
+        <div class="container">
+            <!-- Main title -->
+            <div class="main-title">
+                <input type="text" name="search" class="form-control has-icon b-radius" placeholder="Nom Evenement" id="Search">
+            </div>
+
+            <!-- Slick slider area start -->
+            <div class="slick-slider-area">
+                <div class="row slick-carousel slick-initialized slick-slider" data-slick="{&quot;slidesToShow&quot;: 3, &quot;responsive&quot;:[{&quot;breakpoint&quot;: 1024,&quot;settings&quot;:{&quot;slidesToShow&quot;: 2}}, {&quot;breakpoint&quot;: 768,&quot;settings&quot;:{&quot;slidesToShow&quot;: 1}}]}"><div class="slick-list draggable" style="padding: 0px;"><div class="slick-track" style="opacity: 1; width: 3960px; transform: translate3d(-720px, 0px, 0px);"><div class="slick-slide slick-cloned" data-slick-index="-3" aria-hidden="true" style="width: 360px;" tabindex="-1"><div><div class="slick-slide-item" style="width: 100%; display: inline-block;">
+                                        <div class="blog-3">
+                                            <div class="blog-photo">
+                                                <img src="{{ asset('img/blog/blog-3.jpg') }}" alt="blog" class="img-fluid">
+
+                                                <div class="date-box">
+                                                    <span>23</span>Feb
+                                                </div>
+                                            </div>
+                                            <div class="detail">
+                                                <h3>
+                                                    <a href="blog-details.html" tabindex="-1">Back To Work After Vacation</a>
+                                                </h3>
+                                                <div class="post-meta">
+                                                    <span><a href="#" tabindex="-1"><i class="flaticon-male"></i>Amdin</a></span>
+                                                    <span><a href="#" tabindex="-1"><i class="flaticon-comment"></i>27</a></span>
+                                                    <span><a href="#" tabindex="-1"><i class="fa fa-heart-o"></i>27</a></span>
+                                                </div>
+                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="slick-slide slick-cloned" data-slick-index="6" aria-hidden="true" style="width: 360px;" tabindex="-1"><div><div class="slick-slide-item" style="width: 100%; display: inline-block;">
+                                        <div class="blog-3">
+                                            <div class="blog-photo">
+                                                <img src="{{ asset('img/blog/blog-1.jpg')}}" alt="blog" class="img-fluid">
+                                                <div class="date-box">
+                                                    <span>23</span>Feb
+                                                </div>
+                                            </div>
+                                            <div class="detail">
+                                                <h3>
+                                                    <a href="blog-details.html" tabindex="-1">Job Motivational Quote</a>
+                                                </h3>
+                                                <div class="post-meta">
+                                                    <span><a href="#" tabindex="-1"><i class="flaticon-male"></i>Amdin</a></span>
+                                                    <span><a href="#" tabindex="-1"><i class="flaticon-comment"></i>27</a></span>
+                                                    <span><a href="#" tabindex="-1"><i class="fa fa-heart-o"></i>27</a></span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div></div></div>
+                            {% for e in ev %}
+                                <div class="search">
+                                    <div class="slick-slide slick-cloned" data-slick-index="7" aria-hidden="true" style="width: 360px;" tabindex="-1"><div><div class="slick-slide-item" style="width: 100%; display: inline-block;">
+                                                <div class="blog-3">
+                                                    <div class="blog-photo">
+                                                        <img src="{{ asset('uploads/images/') ~ e.image }}" width="80" height="80" alt="blog" class="img-fluid">
+                                                        <div class="date-box">
+                                                            <span>{{ e.dateEvenement |date('d') }}</span>{{ e.dateEvenement |date('m') }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="detail">
+                                                        <h3>
+                                                            <a href="blog-details.html" tabindex="-1">{{ e.nomEvenement}}</a>
+                                                        </h3>
+                                                        <div class="post-meta">
+                                                            <span><a href="#" tabindex="-1"><i class="flaticon-male"></i>Amdin</a></span>
+                                                            <form action="{{ path("Participer",{'id' : e.id}) }}" onclick="return confirm('Participer a cette event')">
+                                                                <input type="submit" class="btn btn-outline-danger" value="Participer"/>
+                                                            </form>
+                                                        </div>
+                                                        <h5>Lieu : {{ e.lieuEvenement }}</h5></br>
+                                                        <h5>Max Participants: {{ e.nombreMaxParticipant }} </h5>
+                                                    </div>
+                                                </div>
+                                            </div></div></div></div>
+                            {% endfor %}</div></div></div>
+                <div class="slick-prev slick-arrow-buton">
+                    <i class="fa fa-angle-left"></i>
+                </div>
+                <div class="slick-next slick-arrow-buton">
+                    <i class="fa fa-angle-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script>
+        $(document).ready(function () {
+            function Contains(text_one, text_two) {
+                if (text_one.indexOf(text_two) != -1)
+                    return true;
+            }
+            $("#Search").keyup(function () {
+                var searchText = $("#Search").val().toLowerCase();
+                $(".search").each(function () {
+                    if (!Contains($(this).text().toLowerCase(), searchText)) {
+                        $(this).hide();
+                    }
+                    else {
+                        $(this).show();
+                    }
+                });
+            });
+        });
+
+    </script>
+{% endblock %}
