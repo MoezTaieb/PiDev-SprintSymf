@@ -168,7 +168,38 @@ class DefaultController extends Controller
         $em = $this->getDoctrine();
         $em->getManager()->persist($part);
         $em->getManager()->flush();
+        $message= \Swift_Message::newInstance()
+        ->setSubject("Participation")
+            ->setFrom(array('moez.taieb@esprit.tn'=> 'Moez'))
+            ->setTo($user->getEmailCanonical())
+            ->setCharset('utf-8')
+            ->setContentType('text/html')
+            ->setBody($this->renderView('@Event\Default\mail.html.twig',array('eve' => $eve)));
+        $this->get('mailer')->send($message);
         return $this->redirectToRoute("event");
+
+    }
+
+
+
+
+    public function mailAction()
+    {
+        $transport = new \Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl');
+        $transport->setUsername('moez.taieb@esprit.tn')->setPassword('193JMT4407');
+
+        $mailer = new \Swift_Mailer($transport);
+
+        $message = new \Swift_Message('Weekly Hours');
+        $message
+            ->setFrom(['othmenhosni@esprit.tn' => 'My Name'])
+            ->setTo(['mohamedrayane.douss@esprit.tn' => 'Recipient'])
+            ->setSubject('Weekly Hours')
+            ->setBody('Test Message', 'text/html');
+
+        $this->get('mailer')->send($message);
+
+return $this->render('@Event\Default\mail.html.twig');
 
     }
 

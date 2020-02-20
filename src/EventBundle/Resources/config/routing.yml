@@ -34,3 +34,7 @@ Participer:
     path:     /particip/{id}
     defaults: { _controller: EventBundle:Default:affecterParticipant }
 
+mail:
+    path:     /mailing
+    defaults: { _controller: EventBundle:Default:mail }
+
