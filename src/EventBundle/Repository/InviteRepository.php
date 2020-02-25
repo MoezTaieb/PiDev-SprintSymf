@@ -10,4 +10,11 @@ namespace EventBundle\Repository;
  */
 class InviteRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getInvitById($id)
+    {
+        $qb = $this->getEntityManager()
+            ->createQuery("select i from EventBundle:Invite i where i.evenement=:param")
+            ->setParameter('param',$id);
+        return $query = $qb->getResult();
+    }
 }

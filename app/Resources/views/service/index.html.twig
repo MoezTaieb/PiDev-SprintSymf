@@ -1,18 +1,11 @@
-{% extends 'baseback.html.twig' %}
+{% extends 'basee.html.twig' %}
 
 {% block body %}
 
 
     <h2>Search A Post !!</h2>
 
-    <div class="sidebar-search">
 
-        <div class="input-group custom-search-form">
-
-            <label for="search"></label><input type="text" id="search" class="form-control" placeholder="Search here">
-        </div>
-        <!-- /input-group -->
-    </div>
     <ul class="nav" id="side-menu">
         <li>
             <a href="#"> Entities<span class="fa arrow"></span></a>
@@ -26,7 +19,7 @@
     <script type="text/javascript">
         jQuery(document).ready(function() {
             var searchRequest = null;
-            $("#search").keyup(function() {
+            $("#input-31").keyup(function() {
                 var minlength = 1;
                 var that = this;
                 var value = $(this).val();
@@ -36,7 +29,7 @@
                         searchRequest.abort();
                     searchRequest = $.ajax({
                         type: "GET",
-                        url: "{{ path('ajax_search') }}",
+                        url: "{{ path('ajax_search4') }}",
                         data: {
                             'p' : value
                         },
@@ -111,4 +104,7 @@
             <a href="{{ path('service_new') }}">Create a new service</a>
         </li>
     </ul>
+    {{ knp_pagination_render(services) }}
+
+
 {% endblock %}

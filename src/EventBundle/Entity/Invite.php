@@ -3,6 +3,7 @@
 namespace EventBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Invite
@@ -23,7 +24,7 @@ class Invite
 
     /**
      * @ORM\ManyToOne(targetEntity="Evenement" , inversedBy="invites")
-     * @ORM\JoinColumn(name="evenement_id",referencedColumnName="id")
+     * @ORM\JoinColumn(name="evenement_id",referencedColumnName="id" , onDelete="CASCADE")
      */
     private $evenement ;
 
@@ -46,6 +47,7 @@ class Invite
      * @var string
      *
      * @ORM\Column(name="nomInvite", type="string", length=255)
+     * @Assert\NotBlank(message="Nom obligatoire")
      */
     private $nomInvite;
 
@@ -53,6 +55,7 @@ class Invite
      * @var string
      *
      * @ORM\Column(name="prenomInvite", type="string", length=255)
+     * @Assert\NotBlank(message="Prénom obligatoire")
      */
     private $prenomInvite;
 

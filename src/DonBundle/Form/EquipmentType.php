@@ -17,7 +17,9 @@ class EquipmentType extends AbstractType
     {
 
         $builder->add('nomEquipment')
-            ->add('affectation')->add('evenement')->add('categorieEquipment');
+            ->add('affectation')
+            ->add('evenement')->add('categorieEquipment')->add('categorieEquipment')
+            ->add('nbEquipment');
     }/**
      * {@inheritdoc}
      */

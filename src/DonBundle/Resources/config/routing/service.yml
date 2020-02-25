@@ -22,7 +22,7 @@ service_delete:
     path:     /{id}/delete
     defaults: { _controller: "DonBundle:Service:delete" }
     methods:  DELETE
-ajax_search:
+ajax_search4:
     path:     /search
     defaults: { _controller: "DonBundle:Service:search" }
     methods:  GET

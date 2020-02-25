@@ -23,6 +23,13 @@ class AppKernel extends Kernel
             new CampBundle\CampBundle(),
             new DonBundle\DonBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
+            new GrapheBundle\GrapheBundle(),
+            new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
+            new FOS\MessageBundle\FOSMessageBundle(),
+            new Octopush\Bundle\SMSBundle\OctopushSMSBundle(),
+            new SBC\NotificationsBundle\NotificationsBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -2,6 +2,68 @@
 
 {% block body %}
 
+<!-- Banner start -->
+<div class="banner bg-color-full" id="banner">
+    <div id="bannerCarousole" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item banner-max-height active">
+                <img class="d-block w-100 h-100" src="{{ asset('front/img/banner/banner-2.jpg')}}" alt="banner">
+                <div class="carousel-caption banner-slider-inner d-flex text-center"></div>
+            </div>
+        </div>
+    </div>
+    <div class="banner-inner">
+        <div class="container">
+            <div class="text-center">
+                <h3 class="b-text">Find informations about refugee</h3>
+                <div class="inline-search-area ml-auto mr-auto none-768">
+                    <div class="search-boxs">
+                        <div class="search-col">
+                            <input type="text" name="search" class="form-control has-icon b-radius" placeholder=" Keywords , Camp name or Refugee name ...">
+                        </div>
+                        <div class="search-col">
+                            <select class="selectpicker search-fields" name="location">
+                                <option>Camp</option>
+                                <option>Refugee</option>
+                                <option>Volunteer</option>
+                                <option>Don</option>
+                            </select>
+                        </div>
+                        <div class="find">
+                            <button class="btn button-theme btn-search btn-block b-radius">
+                                <i class="fa fa-search"></i><strong>Find </strong>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!---->
+                <div class="banner-counter-box none-768">
+                    <div class="counter-box">
+                        {% for equipment in equipment %}
+                        <h1 class="counter">   {{ equipment.nb }}
+                        </h1>
+
+                        <p>quantite de donation d equipment </p>
+                    </div>
+                    <div class="counter-box">
+                        <h1 class="counter">{{ equipment.nb1 }}</h1>
+                        <p>donation d equipment</p>
+                    </div>
+                    {% endfor %}
+                    {% for service in service %}
+                    <div class="counter-box">
+                        <h1 class="counter">{{ service.nb2 }}</h1>
+                        <p>Candidates</p>
+
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Banner end -->
+<body>
 
 
 

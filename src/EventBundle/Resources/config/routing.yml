@@ -1,3 +1,48 @@
 event:
     path:     /event
     defaults: {_controller: EventBundle:Default:index }
+
+AjoutE:
+    path:     /AjoutEv
+    defaults: {_controller: EventBundle:Default:ajouterEvent }
+
+SuppEvent:
+    path:     /supprimer/{id}
+    defaults: { _controller: EventBundle:Default:supprimerEvent }
+
+ModifierEvent:
+    path:     /ModifierE/{id}
+    defaults: { _controller: EventBundle:Default:updateEvent }
+
+AjoutInvit:
+    path:     /AjoutI/{id}
+    defaults: { _controller: EventBundle:Default:AjouterInvit }
+
+AffInvit:
+    path:     /AfficherI/{id}
+    defaults: { _controller: EventBundle:Default:AfficheInvit }
+
+ModifierInvi:
+    path:     /ModifierInvi/{id}
+    defaults: { _controller: EventBundle:Default:updateInvit }
+
+SuppInvi:
+    path:     /supprimerInvi/{id}
+    defaults: { _controller: EventBundle:Default:supprimerInvit }
+
+Participer:
+    path:     /particip/{id}
+    defaults: { _controller: EventBundle:Default:affecterParticipant }
+
+mail:
+    path:     /mailing
+    defaults: { _controller: EventBundle:Default:mail }
+
+myevent:
+    path:     /myevent
+    defaults: { _controller: EventBundle:Default:myevents }
+
+AnnulerEvent:
+    path:     /annuler/{id}
+    defaults: { _controller: EventBundle:Default:annulerevent }
+

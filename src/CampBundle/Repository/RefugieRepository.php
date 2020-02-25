@@ -2,6 +2,10 @@
 
 namespace CampBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
+use CampBundle\Entity\Refugie;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\Query;
 /**
  * RefugieRepository
  *
@@ -10,4 +14,14 @@ namespace CampBundle\Repository;
  */
 class RefugieRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findEntitiesByString($str){
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT p
+                FROM CampBundle:Refugie p
+                WHERE p.nomRefugie LIKE :str'
+            )
+            ->setParameter('str', '%'.$str.'%')
+            ->getResult();
+    }
 }

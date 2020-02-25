@@ -29,5 +29,16 @@ class ServiceRepository extends \Doctrine\ORM\EntityRepository
             ->getResult();
     }
 
+    public function findbySnom()
+    {  return $this->getEntityManager()
+        ->createQuery(
+            'SELECT count(p.nomService) as nb2
+                FROM DonBundle:Service p
+                '
+        )
+        //  ->setParameter('str', '%'."En cours".'%')
+        ->getResult();
+
+    }
 
 }

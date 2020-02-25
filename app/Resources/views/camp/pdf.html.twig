@@ -1,0 +1,31 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        window.print();
+    });
+
+</script>
+<table class="table">
+    <thead>
+    <th >Id</th>
+    <th >Nom</th>
+    <th>Adresse</th>
+    <th>nombre de refugier max</th>
+
+    </thead>
+    <tbody>
+    {% for camp in camps %}
+    <tr>
+        <th scope="row">{{ camp.id }}</th>
+
+        <td>{{ camp.nomCamp }}</td>
+        <td>{{ camp.adresseCamp }}</td>
+        <td>{{ camp.nbrefugier }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>

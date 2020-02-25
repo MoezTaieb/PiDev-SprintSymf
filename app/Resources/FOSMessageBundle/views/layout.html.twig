@@ -1,0 +1,24 @@
+{% extends 'baseDashboradUser.html.twig' %}
+
+{% block body %}
+    <br>
+    <div class="content-area5 dashboard-content">
+        <div class="dashboard-header clearfix">
+            <div class="row">
+                <div class="col-sm-12 col-md-6"></div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="breadcrumb-nav">
+
+                        <button type="button" class="btn btn-light"><a href="{{ url('fos_message_inbox') }}">{% trans from 'FOSMessageBundle' %}inbox{% endtrans %}</a></button>
+                        <button type="button" class="btn btn-warning"><a href="{{ url('fos_message_sent') }}">{% trans from 'FOSMessageBundle' %}sent{% endtrans %}</a></button>
+                        <button type="button" class="btn btn-danger"><a href="{{ url('fos_message_deleted') }}">{% trans from 'FOSMessageBundle' %}deleted{% endtrans %}</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="submit-address dashboard-list">
+            {% block fos_message_content %}{% endblock %}
+        </div>
+    </div>
+
+{% endblock %}

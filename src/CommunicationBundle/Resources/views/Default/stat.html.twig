@@ -1,0 +1,50 @@
+{% extends 'basee.html.twig' %}
+
+{% block body %}
+<script src="https://cdn.anychart.com/js/8.0.1/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/js/8.0.1/anychart-pie.min.js"></script>
+<style>
+
+    html, body, #containe2 {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<div id="container" style="width: 100%; height: 100%"></div>
+
+
+    <script>
+    anychart.onDocumentReady(function() {
+
+        // set the data
+        var data = [
+            {x: "Annonce", value: {{annStat[0].nbAnnonce| number_format }} },
+            {x: "Comments", value: {{comStat[0].nbComm| number_format }}},
+        ];
+
+        // create the chart
+        var chart = anychart.pie();
+
+        // set the chart title
+        chart.title("Ads compared by comments");
+        chart.legend().position("right");
+
+        // add the data
+        chart.data(data);
+
+        // display the chart in the container
+        chart.container('container');
+        chart.draw();
+
+        //
+
+
+
+    });
+
+</script>
+
+{% endblock %}

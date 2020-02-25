@@ -1,6 +1,66 @@
-a:
-    path:     /ajoutannonce
-    defaults: { _controller: CommunicationBundle:Default:index }
 consulerannonce:
     path:     /consulerannonce
-    defaults: { _controller: CommunicationBundle:Default:consulerannonce }
+    defaults: { _controller: CommunicationBundle:Annonce:index }
+
+
+showDetails:
+    path:     /showDetails/{id}
+    defaults: { _controller: CommunicationBundle:Annonce:showDetails }
+
+deleteAd:
+    path:     /deleteAd/{id}
+    defaults: { _controller: CommunicationBundle:Annonce:deleteAd }
+
+addAd:
+    path:     /addAd
+    defaults: { _controller: CommunicationBundle:Annonce:new }
+editAd:
+    path:     /editAd/{id}
+    defaults: { _controller: CommunicationBundle:Annonce:edit }
+deleteComment:
+    path:     /deleteComment/{id}
+    defaults: { _controller: CommunicationBundle:Commentaire:deleteComment }
+editComment:
+    path:     /editComment/{id}
+    defaults: { _controller: CommunicationBundle:Commentaire:editComment }
+
+
+search:
+    path:     /sear
+    defaults: { _controller: CommunicationBundle:Annonce:searchlist }
+
+stat:
+    path:     /stat
+    defaults: { _controller: CommunicationBundle:Annonce:stat }
+mailForUser:
+    path:     /mailForUser
+    defaults: { _controller:  CommunicationBundle:Default:mailForUser }
+newSms:
+    path:     /newSms
+    defaults: { _controller:  CommunicationBundle:Message:newSms }
+
+sendNotification:
+    path:     /sendNotification
+    defaults: { _controller:  CommunicationBundle:Default:sendNotification }
+# ajax url please   don't use all this paths
+ajax_search:
+    path:     /search
+    defaults: { _controller: CommunicationBundle:Annonce:search }
+ajax_marquer:
+    path:     /marquer
+    defaults: { _controller: CommunicationBundle:Default:marquer }
+
+orderByDateDESC:
+    path:     /consulerannonce/desc
+    defaults: { _controller: CommunicationBundle:Annonce:orderByDateDESC }
+
+orderByDateTitle:
+    path:     /consulerannonce/descT
+    defaults: { _controller: CommunicationBundle:Annonce:orderByDateTitle }
+
+recommander:
+    path:     /recommandation/{annonceid}
+    defaults: { _controller: CommunicationBundle:Annonce:recommander }
+deconseiller:
+    path:     /deconseiller/{annonceid}
+    defaults: { _controller: CommunicationBundle:Annonce:deconseiller }

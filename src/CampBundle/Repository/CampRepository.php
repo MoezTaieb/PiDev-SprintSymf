@@ -2,6 +2,11 @@
 
 namespace CampBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
+use CampBundle\Entity\Camp;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\Query;
+
 /**
  * CampRepository
  *
@@ -10,4 +15,15 @@ namespace CampBundle\Repository;
  */
 class CampRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findEntitiesByString($str){
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT p
+                FROM CampBundle:Camp p
+                WHERE p.nomCamp LIKE :str'
+            )
+            ->setParameter('str',
+                '%'.$str.'%')
+            ->getResult();
+    }
 }

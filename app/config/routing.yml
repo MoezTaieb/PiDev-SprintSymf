@@ -1,3 +1,7 @@
+graphe:
+    resource: "@GrapheBundle/Resources/config/routing.yml"
+    prefix:   /test
+
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
@@ -19,3 +23,10 @@ app:
     type: annotation
     prefix:   /home
 
+
+fos_message:
+    resource: "@FOSMessageBundle/Resources/config/routing.xml"
+    prefix: /mes
+CRUDevent:
+    path:     /crudE
+    defaults: { _controller: EventBundle:Default:afficher}

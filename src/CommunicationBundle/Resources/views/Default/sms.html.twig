@@ -1,0 +1,112 @@
+{% extends 'basee.html.twig' %}
+
+{% block body %}
+    <style>
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even){background-color: #f2f2f2}
+    </style>
+
+    <div class="dashboard-list">
+        <h3 class="heading">Send email for specific user</h3>
+        <div class="dashboard-message contact-2 bdr clearfix">
+            <div class="row">
+
+                <div class="col-lg-4 col-md-4">
+                    <button id="showusers">Show users</button>
+                    <button id="showmessages">Show messages</button>
+
+                    <div id="listusers" style="overflow-x:auto;">
+                        <table>
+                            <tr>
+                                <th>Username</th>
+                                <th>Mobile Number</th>
+                            </tr>
+                            {% for user in users %}
+                            <tr>
+                                <td> {{ user.username }} </td>
+                                    <td> {{ user.teluser }}</td>
+                                {% endfor %}
+
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="listmess" style="overflow-x:auto;">
+                        <table>
+                            <tr>
+                                <th>SMS</th>
+                            </tr>
+                            {% for sms in messages %}
+                            <tr>
+                                <td> {{ sms.contenuMessage }} </td>
+                                {% endfor %}
+
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="col-lg-8 col-md-8">
+                    {{ form_start(form) }}
+
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group name">
+                                {{ form_label(form.numero, "Mobile Number") }}
+                                {{  form_widget(form.numero ,{'attr': {'class': 'form-control'}}) }}
+
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group mb-0 message">
+                                {{  form_label(form.message, "message") }}
+                                {{  form_widget(form.message ,{'attr': {'class': 'form-control'}}) }}
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group name">
+
+                            </div>
+                        </div>
+                        {{  form_widget(form.send ,{'attr': {'class': 'btn btn-md button-theme'}}) }}
+                    </div>
+                    {{ form_end(form) }}
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("#listmess").hide();
+
+            $("#showusers").click(function(){
+                $("#listusers").toggle();
+
+
+            });
+            $("#showmessages").click(function(){
+                    $("#listmess").toggle();
+
+
+            });
+        });
+    </script>
+{% endblock%}
+

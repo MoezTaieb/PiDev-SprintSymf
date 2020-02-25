@@ -2,7 +2,9 @@
 
 namespace CommunicationBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Annonce
@@ -23,10 +25,74 @@ class Annonce
 
 
      /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User" , inversedBy="annonces")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User" , inversedBy="annonces"  )
      * @ORM\JoinColumn(name="posteur_id",referencedColumnName="id")
      */
     private $posteur ;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Commentaire" , mappedBy="annonce" ,cascade={"remove"})
+     */
+    private $comments ;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Recommandation" , mappedBy="annonce" ,cascade={"remove"})
+     */
+    private $recommandations ;
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getRecommandations()
+    {
+        return $this->recommandations;
+    }
+
+    /**
+     * @param ArrayCollection $recommandations
+     */
+    public function setRecommandations($recommandations)
+    {
+        $this->recommandations = $recommandations;
+    }
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+        $this->recommandations=new ArrayCollection();
+
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param ArrayCollection $comments
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+    }
+    /**
+     * @return mixed
+     */
+    public function getPosteur()
+    {
+        return $this->posteur;
+    }
+
+    /**
+     * @param mixed $posteur
+     */
+    public function setPosteur($posteur)
+    {
+        $this->posteur = $posteur;
+    }
 
 
 
@@ -34,6 +100,11 @@ class Annonce
      * @var string
      *
      * @ORM\Column(name="titreAnnonce", type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      minMessage = "Your title must be at least {{ limit }} characters long",
+     * )
      */
     private $titreAnnonce;
 
@@ -41,20 +112,25 @@ class Annonce
      * @var string
      *
      * @ORM\Column(name="descriptionAnnonce", type="text")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      minMessage = "Your description must be at least {{ limit }} characters long",
+     * )
      */
     private $descriptionAnnonce;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="imageUrlAnnonce", type="string", length=255)
+     * @ORM\Column(name="imageUrlAnnonce", type="string", length=255 ,nullable=true)
      */
     private $imageUrlAnnonce;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateAnnonce", type="datetime")
+     * @ORM\Column(name="dateAnnonce", type="datetime" ,nullable=true)
      */
     private $dateAnnonce;
 
@@ -140,7 +216,6 @@ class Annonce
     {
         return $this->imageUrlAnnonce;
     }
-
     /**
      * Set dateAnnonce
      *

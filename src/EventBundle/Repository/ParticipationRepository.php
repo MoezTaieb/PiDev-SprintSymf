@@ -10,4 +10,11 @@ namespace EventBundle\Repository;
  */
 class ParticipationRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getPartById($id)
+    {
+        $qb = $this->getEntityManager()
+            ->createQuery("select  i from EventBundle:Participation i where i.participant=:param")
+            ->setParameter('param',$id);
+        return $query = $qb->getResult();
+    }
 }

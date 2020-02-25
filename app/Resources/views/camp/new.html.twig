@@ -1,0 +1,13 @@
+{% extends 'basee.html.twig' %}
+
+{% block body %}
+    <h1>Camp creation</h1>
+
+    {{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <button type="button" class="btn btn-info">   <a href="{{ path('camp_index') }}">Back to the list</a></button>
+
+{% endblock %}

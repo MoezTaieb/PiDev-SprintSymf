@@ -1,3 +1,7 @@
-event:
-    path:     /event
-    defaults: { _controller: EventBundle:Default:index }
+camp_camp:
+    resource: "@CampBundle/Resources/config/routing/camp.yml"
+    prefix:   /camp
+
+refugie_refugie:
+    resource: "@CampBundle/Resources/config/routing/refugie.yml"
+    prefix:   /refugie

@@ -1,0 +1,47 @@
+{% extends 'basee.html.twig' %}
+
+{% block body %}
+    <h1>Refugie</h1>
+
+    <table class="table table-sm">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ refugie.id }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ refugie.nomRefugie }}</td>
+        </tr>
+        <tr>
+            <th>Prenom</th>
+            <td>{{ refugie.prenomRefugie }}</td>
+        </tr>
+        <tr>
+            <th>Adresse</th>
+            <td>{{ refugie.adresseRefugie }}</td>
+        </tr>
+        <tr>
+            <th>Tel </th>
+            <td>{{ refugie.telRefugie }}</td>
+        </tr>
+        <tr>
+            <th>Num passport</th>
+            <td>{{ refugie.numassportRefugie }}</td>
+        </tr>
+        <tr>
+            <th>Nationalite</th>
+            <td>{{ refugie.nationaliteRefugie }}</td>
+        </tr>
+        <tr>
+            <th>Image url</th>
+            <td>{{ refugie.image }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <button type="button" class="btn btn-info"> <a href="{{ path('refugie_index') }}">Back to the list</a></button>
+    {{ form_start(delete_form) }}
+    <input type="submit" value="Delete">
+    {{ form_end(delete_form) }}
+{% endblock %}

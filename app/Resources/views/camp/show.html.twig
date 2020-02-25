@@ -1,0 +1,32 @@
+{% extends 'basee.html.twig' %}
+
+{% block body %}
+    <h1>Camp</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ camp.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ camp.nomCamp }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ camp.adresseCamp }}</td>
+            </tr>
+            <tr>
+                <th>nombre de refugier max</th>
+                <td>{{ camp.nbrefugier }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <button type="button" class="btn btn-info">   <a href="{{ path('camp_index') }}">Back to the list</a></button>
+    {{ form_start(delete_form) }}
+    <input type="submit" value="Delete">
+    {{ form_end(delete_form) }}
+{% endblock %}

@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use FOS\MessageBundle\Model\ParticipantInterface;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,8 +11,15 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
  */
-class User extends BaseUser
+class User extends BaseUser implements ParticipantInterface
 {
+    /**
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -19,12 +27,35 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
    /**
      * @ORM\OneToOne(targetEntity="CampBundle\Entity\Camp" , mappedBy="responsable")
      */
     private $camp ;
 
-     /**
+    /**
+     * @ORM\OneToMany(targetEntity="CommunicationBundle\Entity\Recommandation"  , mappedBy="recommandeur")
+     */
+    private $recommandation ;
+
+
+
+    /**
      * @ORM\OneToMany(targetEntity="EventBundle\Entity\Participation" , mappedBy="participant")
      */
     
@@ -54,7 +85,26 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="CommunicationBundle\Entity\Message" , mappedBy="destinataire")
      */
     private $messagesReçus;
+    /**
+     * @ORM\OneToMany(targetEntity="CommunicationBundle\Entity\Notifications" , mappedBy="userNotifier")
+     */
+    private $notifications;
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getNotifications()
+    {
+        return $this->notifications;
+    }
+
+    /**
+     * @param ArrayCollection $notifications
+     */
+    public function setNotifications($notifications)
+    {
+        $this->notifications = $notifications;
+    }
     /**
      * @var string
      *
@@ -232,8 +282,10 @@ class User extends BaseUser
             $this->annonces=new ArrayCollection();
             $this->messagesEnvoyes=new ArrayCollection();
             $this->messagesReçus=new ArrayCollection();
+            $this->recommandation=new ArrayCollection();
+        $this->notifications=new ArrayCollection();
 
-    
+
 
 
 

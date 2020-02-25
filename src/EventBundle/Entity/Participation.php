@@ -38,52 +38,14 @@ class Participation
 
     /**
      * @ORM\ManyToOne(targetEntity="Evenement" , inversedBy="participations")
-     * @ORM\JoinColumn(name="participation_id",referencedColumnName="id")
+     * @ORM\JoinColumn(name="evenement_id",referencedColumnName="id" , onDelete="CASCADE")
      */
     private $evenement ;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Produit")
-     * @ORM\JoinColumn(name="produit_id",referencedColumnName="id")
-     */
-    private $produit ;
 
-    /**
-     * @ORM\OneToOne(targetEntity="DonBundle\Entity\Argent" , mappedBy="participation")
-     */
-    private $argent ;
 
-    /**
-     * @return mixed
-     */
-    public function getArgent()
-    {
-        return $this->argent;
-    }
 
-    /**
-     * @param mixed $argent
-     */
-    public function setArgent($argent)
-    {
-        $this->argent = $argent;
-    }
 
-    /**
-     * @return mixed
-     */
-    public function getProduit()
-    {
-        return $this->produit;
-    }
-
-    /**
-     * @param mixed $produit
-     */
-    public function setProduit($produit)
-    {
-        $this->produit = $produit;
-    }
 
     /**
      * @return mixed
@@ -134,5 +96,22 @@ class Participation
     {
         return $this->dateParticipation;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getParticipant()
+    {
+        return $this->participant;
+    }
+
+    /**
+     * @param mixed $participant
+     */
+    public function setParticipant($participant)
+    {
+        $this->participant = $participant;
+    }
+
 }
 

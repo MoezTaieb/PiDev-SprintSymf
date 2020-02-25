@@ -35,6 +35,22 @@ class Message
      */
     private $destinataire ;
 
+    /**
+     * @return mixed
+     */
+    public function getEmetteur()
+    {
+        return $this->emetteur;
+    }
+
+    /**
+     * @param mixed $emetteur
+     */
+    public function setEmetteur($emetteur)
+    {
+        $this->emetteur = $emetteur;
+    }
+
 
     /**
      * @var string

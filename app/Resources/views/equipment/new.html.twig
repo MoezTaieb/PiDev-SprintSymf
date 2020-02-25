@@ -1,13 +1,24 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% include 'smalBanner.html.twig' %}
 <div class="container">
     <h1>donation Equipment </h1>
 <div class="form-group">
     {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+
+
+
     {{ form_start(form) }}
+
+
+    <td id="nom">{{  form_row(form.nomEquipment) }}</td>
+    {{ form_row(form.affectation) }}
+
+
+
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        <input type="submit"  onclick="afficher()"  value="Create" />
     {{ form_end(form) }}
 
     <ul>
@@ -16,8 +27,26 @@
         </li>
     </ul></div></div>
 {% else %}
-<h1> vous n éte pas connécter </h1>
-<a href="{{ path('fos_user_security_login') }}">
-    </h1>
+<h1> vous n éte pas connécter</h1>
+<a href="{{ path('fos_user_security_login') }}">login
+</a>
+
     {%endif%}
+    <script>
+
+        function afficher()
+        {
+            var nom=document.getElementById('donbundle_equipment_nomEquipment').value;
+            var montant=document.getElementById('donbundle_equipment_nbEquipment').value;
+
+            if((nom=="")||(montant<0))
+            {
+                alert("verifier les champs");
+            }
+            else{
+                alert(' envoyer ');
+            }
+        }
+    </script>
+
 {% endblock %}

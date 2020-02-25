@@ -1,0 +1,38 @@
+refugie_index:
+    path:     /
+    defaults: { _controller: "CampBundle:Refugie:index" }
+    methods:  GET
+
+refugie_show:
+    path:     /{id}/show
+    defaults: { _controller: "CampBundle:Refugie:show" }
+    methods:  GET
+
+refugie_new:
+    path:     /new
+    defaults: { _controller: "CampBundle:Refugie:new" }
+    methods:  [GET, POST]
+
+refugie_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "CampBundle:Refugie:edit" }
+    methods:  [GET, POST]
+
+refugie_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "CampBundle:Refugie:delete" }
+    methods:  DELETE
+ajax_search3:
+    path:     /search
+    defaults: { _controller: "CampBundle:Refugie:search" }
+    methods:  GET
+refugie_pdf:
+    path:     /pdf
+    defaults: { _controller: "CampBundle:Refugie:pdf" }
+    methods:  GET
+refugie_index2:
+    path:     /tnom
+    defaults: { _controller: "CampBundle:Refugie:index2" }
+    methods:  GET
+
+

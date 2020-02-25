@@ -1,4 +1,4 @@
-{% extends 'baseBack.html.twig' %}
+{% extends 'basee.html.twig' %}
 
 {% block body %}
     <h1>Categorieservices list</h1>
@@ -36,4 +36,7 @@
             <a href="{{ path('categorieservice_new') }}">Create a new categorieService</a>
         </li>
     </ul>
+    {{ knp_pagination_render(categorieServices) }}
+
+
 {% endblock %}

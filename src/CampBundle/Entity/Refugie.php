@@ -3,6 +3,7 @@
 namespace CampBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Refugie
@@ -24,6 +25,8 @@ class Refugie
     /**
      * @ORM\ManyToOne(targetEntity="Camp" , inversedBy="refugies")
      * @ORM\JoinColumn(name="camp_id",referencedColumnName="id")
+     * @Assert\NotBlank(message="Définir le nom du camp")
+
      */
     private $camp ;
 
@@ -49,6 +52,7 @@ class Refugie
      * @var string
      *
      * @ORM\Column(name="nomRefugie", type="string", length=255)
+     * @Assert\NotBlank(message="Définir le nom du refugier")
      */
     private $nomRefugie;
 
@@ -56,6 +60,7 @@ class Refugie
      * @var string
      *
      * @ORM\Column(name="prenomRefugie", type="string", length=255)
+     * @Assert\NotBlank(message="Définir le prenom du refugier")
      */
     private $prenomRefugie;
 
@@ -63,6 +68,7 @@ class Refugie
      * @var string
      *
      * @ORM\Column(name="adresseRefugie", type="string", length=255)
+     * @Assert\NotBlank(message="Définir l'adresse du refugier")
      */
     private $adresseRefugie;
 
@@ -70,6 +76,7 @@ class Refugie
      * @var string
      *
      * @ORM\Column(name="telRefugie", type="string", length=255)
+     * @Assert\NotBlank(message="Définir le num de tel")
      */
     private $telRefugie;
 
@@ -77,6 +84,7 @@ class Refugie
      * @var string
      *
      * @ORM\Column(name="numassportRefugie", type="string", length=255)
+     * @Assert\NotBlank(message="Définir le num du passport")
      */
     private $numassportRefugie;
 
@@ -84,15 +92,17 @@ class Refugie
      * @var string
      *
      * @ORM\Column(name="nationaliteRefugie", type="string", length=255)
+     * @Assert\NotBlank(message="Définir la nationaliter refugier")
      */
     private $nationaliteRefugie;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="imageUrlRefugie", type="string", length=255)
+     * @ORM\Column(name="image", type="string", length=500)
+     * @Assert\File(maxSize="500k", mimeTypes={"image/jpeg", "image/jpg", "image/png", "image/GIF"})
      */
-    private $imageUrlRefugie;
+    private $image;
 
 
     /**
@@ -250,27 +260,21 @@ class Refugie
     }
 
     /**
-     * Set imageUrlRefugie
-     *
-     * @param string $imageUrlRefugie
-     *
-     * @return Refugie
+     * @return string
      */
-    public function setImageUrlRefugie($imageUrlRefugie)
+    public function getImage()
     {
-        $this->imageUrlRefugie = $imageUrlRefugie;
-
-        return $this;
+        return $this->image;
     }
 
     /**
-     * Get imageUrlRefugie
-     *
-     * @return string
+     * @param string $image
      */
-    public function getImageUrlRefugie()
+    public function setImage($image)
     {
-        return $this->imageUrlRefugie;
+        $this->image = $image;
     }
+
+
 }
 

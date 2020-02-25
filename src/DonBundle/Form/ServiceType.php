@@ -2,6 +2,7 @@
 
 namespace DonBundle\Form;
 
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,7 +15,7 @@ class ServiceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('nomService')->add('descriptionService')
-            ->add('categorieService');
+            ->add('categorieService')->add('captcha', CaptchaType::class);
     }/**
      * {@inheritdoc}
      */

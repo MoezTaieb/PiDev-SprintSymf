@@ -2,10 +2,10 @@
 
 namespace DonBundle\Controller;
 
+use DonBundle\Entity\Equipment;
 use DonBundle\Entity\Service;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
 
 use Symfony\Component\HttpFoundation\Response;
 
@@ -19,23 +19,29 @@ class ServiceController extends Controller
      * Lists all service entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $services = $em->getRepository('DonBundle:Service')->findAll();
+        $pagination  = $this->get('knp_paginator')->paginate(
+            $services,
+            $request->query->get('page', 1)/*le numéro de la page à afficher*/,
+            1/*nbre d'éléments par page*/  );
+        return $this->render('service/index.html.twig', array("services"=>$pagination));
 
-        return $this->render('service/index.html.twig', array(
-            'services' => $services,
-        ));
+
+
     }
+
 
     /**
      * Creates a new service entity.
      *
      */
     public function newAction(Request $request)
-    {
+    {$equipment= $this->getDoctrine()->getManager()->getRepository(Equipment::class)->
+    findbyString();
         $service = new Service();
         $form = $this->createForm('DonBundle\Form\ServiceType', $service);
         $form->handleRequest($request);
@@ -50,6 +56,7 @@ class ServiceController extends Controller
 
         return $this->render('service/new.html.twig', array(
             'service' => $service,
+           'equipment'=>$equipment,
             'form' => $form->createView(),
         ));
     }
@@ -59,11 +66,13 @@ class ServiceController extends Controller
      *
      */
     public function showAction(Service $service)
-    {
+    {$equipment= $this->getDoctrine()->getManager()->getRepository(Equipment::class)->
+    findbyString();
         $deleteForm = $this->createDeleteForm($service);
 
         return $this->render('service/show.html.twig', array(
             'service' => $service,
+            'equipment'=>$equipment,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -134,7 +143,7 @@ class ServiceController extends Controller
         $requestString = $request->get('p');
         $posts =  $em->getRepository('DonBundle:Service')->findEntitiesByString($requestString);
         if(!$posts) {
-            $result['posts']['error'] = "Post Not found :( ";
+            $result['posts']['error'] = "Not found  ";
         } else {
             $result['posts'] = $this->getRealEntities($posts);
         }

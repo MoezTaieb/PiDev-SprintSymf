@@ -7,11 +7,15 @@ imports:
     - { resource: "@EventBundle/Resources/config/services.yml" }
     - { resource: "@CampBundle/Resources/config/services.yml" }
     - { resource: "@DonBundle/Resources/config/services.yml" }
+    - { resource: "@GrapheBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+  locale: en
+  image_directory: '%kernel.project_dir%/web/uploads/images'
+  brochures_directory: '%kernel.project_dir%/web/uploads/brochures'
+
 
 framework:
     #esi: ~
@@ -66,6 +70,7 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: '%mailer_transport%'
+    encryption: '%mailer_encryption%'
     host: '%mailer_host%'
     username: '%mailer_user%'
     password: '%mailer_password%'
@@ -85,3 +90,43 @@ fos_user:
     from_email:
         address: "%mailer_user%"
         sender_name: "%mailer_user%"
+fos_message:
+  db_driver: orm
+  thread_class: AppBundle\Entity\Thread
+  message_class: AppBundle\Entity\Message
+
+knp_paginator:
+  page_range: 5                       # number of links showed in the pagination menu (e.g: you have 10 pages, a page_range of 3, on the 5th page you'll see links to page 4, 5, 6)
+  default_options:
+    page_name: page                 # page query parameter name
+    sort_field_name: sort           # sort field query parameter name
+    sort_direction_name: direction  # sort direction query parameter name
+    distinct: true                  # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    filter_field_name: filterField  # filter field query parameter name
+    filter_value_name: filterValue  # filter value query parameter name
+  template:
+    pagination: '@KnpPaginator/Pagination/sliding.html.twig'     # sliding pagination controls template
+    sortable: '@KnpPaginator/Pagination/sortable_link.html.twig' # sort link template
+    filtration: '@KnpPaginator/Pagination/filtration.html.twig'  # filters template
+
+gregwar_captcha: ~
+
+
+octopush_sms:
+  user_login: "fedi.lahbib1@esprit.tn"
+  api_key: "rh7ONxNDwzCsJFkcRXwjEyrS5708Cbix"
+
+#user_login: "lahbib.fedi@gmail.com"
+#    api_key: "U1aRX3dFw1KbJ21lu9FlZmij6lYEDHuq"
+
+# NotificationsBundle configuration
+# NotificationsBundle configuration
+notifications:
+  app_id:     "953064"
+  app_key:    "1c6f8e1a961d411cfc81"
+  app_secret: "56f31d450d8fc04d0325"
+  cluster:    "eu"
+  # Optional
+  # Default false: work without ssl encryption
+  # Set it to true to work with ssl encryption
+  encrypted:  false

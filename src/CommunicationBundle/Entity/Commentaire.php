@@ -3,6 +3,7 @@
 namespace CommunicationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Commentaire
@@ -32,10 +33,26 @@ class Commentaire
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="annonce")
+     * @ORM\ManyToOne(targetEntity="Annonce"  , inversedBy="comments")
      * @ORM\JoinColumn(name="annonce_id",referencedColumnName="id")
      */
     private $annonce ;
+
+    /**
+     * @return mixed
+     */
+    public function getCommentateur()
+    {
+        return $this->commentateur;
+    }
+
+    /**
+     * @param mixed $commentateur
+     */
+    public function setCommentateur($commentateur)
+    {
+        $this->commentateur = $commentateur;
+    }
 
     /**
      * @return mixed
@@ -57,6 +74,11 @@ class Commentaire
      * @var string
      *
      * @ORM\Column(name="contenuCommentaire", type="text")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      minMessage = "Your comment must be at least {{ limit }} characters long",
+     * )
      */
     private $contenuCommentaire;
 

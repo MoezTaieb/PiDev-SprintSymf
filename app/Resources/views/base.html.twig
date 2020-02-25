@@ -3,7 +3,7 @@
 <html lang="zxx">
 <!-- Copied from http://storage.googleapis.com/themevessel-products/jobb/index.html by Cyotek WebCopy 1.7.0.600, samedi 8 février 2020, 11:02:37 -->
 <head>
-    <title>JOBB - Job Board HTML Template</title>
+    <title> Réfugié</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
 
@@ -17,12 +17,14 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('front/css/daterangepicker.css')}}">
     <link rel="stylesheet" href="css/leaflet.css" type="text/css">
     <link rel="stylesheet" href="css/map.css" type="text/css">
+
     <link rel="stylesheet" type="text/css" href="{{ asset('front/fonts/font-awesome/css/font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('front/fonts/flaticon/font/flaticon.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('front/fonts/linearicons/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('front/css/jquery.mCustomScrollbar.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('front/css/dropzone.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('front/css/slick.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/fontawesome-all.min')}}">
 
     <!-- Custom stylesheet -->
     <link rel="stylesheet" type="text/css" href="{{ asset('front/css/style.css')}}">
@@ -55,7 +57,7 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand logo" href="index.html">
-                <img src="{{ asset('front/img/logos/black-logo.png')}}" alt="logo">
+                <img src="{{ asset('front/img/logos/logos.png')}}" alt="logo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -66,6 +68,10 @@
                         <a class="nav-link dropdown-toggle" href="{{ path("event") }}" >
                             event
                         </a>
+                        <ul class="dropdown-menu dm-2" aria-labelledby="navbarDropdownMenuLink9">
+                            <li><a class="dropdown-item" href="{{ path("myevent") }}">My events</a></li>
+                        </ul>
+                    </li>
 
 
 
@@ -118,7 +124,7 @@
                             annonce
                         </a>
                         <ul class="dropdown-menu dm-2" aria-labelledby="navbarDropdownMenuLink10">
-                            <li><a class="dropdown-item" href="{{ path("a") }}">consulter annonce</a></li>
+                            <li><a class="dropdown-item" href="{{ path("addAd") }}">consulter annonce</a></li>
                             <li><a class="dropdown-item" href="{{ path("consulerannonce") }}">ajouter annonce</a></li>
                         </ul>
                     </li>
@@ -126,14 +132,14 @@
 
                     <li class="nav-item dropdown">
 
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                       effectuer un don
-                    </a>
-                    <ul class="dropdown-menu dm-2" aria-labelledby="navbarDropdownMenuLink10">
-                        <li><a class="dropdown-item" href="{{ path("equipment_new") }}"> equipment</a></li>
-                        <li><a class="dropdown-item" href="{{ path("service_new") }}"> service</a></li>
-                      {#  <li><a class="dropdown-item" href="{{ path("ajoutequipement") }}"> equipement</a></li>#}
-                    </ul>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            effectuer un don
+                        </a>
+                        <ul class="dropdown-menu dm-2" aria-labelledby="navbarDropdownMenuLink10">
+                            <li><a class="dropdown-item" href="{{ path("equipment_new") }}"> equipment</a></li>
+                            <li><a class="dropdown-item" href="{{ path("service_new") }}"> service</a></li>
+                            {#  <li><a class="dropdown-item" href="{{ path("ajoutequipement") }}"> equipement</a></li>#}
+                        </ul>
                     </li>
 
 
@@ -153,7 +159,7 @@
                     </ul>
                     <li class="nav-item">
                         {% if is_granted('ROLE_ADMIN') %}
-                            <a  href="{{ path('equipment_index') }}" class="nav-link link-color">  dashboard</a>
+                            <a  href="{{ path('homepageback') }}" class="nav-link link-color">  dashboard</a>
                         {% endif %}
 
                     </li>
@@ -165,67 +171,24 @@
 </header>
 <!-- Main header end -->
 <!-- Banner start -->
-<div class="banner bg-color-full" id="banner">
-    <div id="bannerCarousole" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item banner-max-height active">
-                <img class="d-block w-100 h-100" src="{{ asset('front/img/banner/banner-2.jpg')}}" alt="banner">
-                <div class="carousel-caption banner-slider-inner d-flex text-center"></div>
-            </div>
-        </div>
-    </div>
-    <div class="banner-inner">
-        <div class="container">
-            <div class="text-center">
-                <h3 class="b-text">Find your job</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                <div class="inline-search-area ml-auto mr-auto none-768">
-                    <div class="search-boxs">
-                        <div class="search-col">
-                            <input type="text" name="search" class="form-control has-icon b-radius" placeholder="Job title, Keywords or company name">
-                        </div>
-                        <div class="search-col">
-                            <select class="selectpicker search-fields" name="location">
-                                <option>location</option>
-                                <option>New York</option>
-                                <option>Australian</option>
-                                <option>Canada</option>
-                                <option>London</option>
-                            </select>
-                        </div>
-                        <div class="find">
-                            <button class="btn button-theme btn-search btn-block b-radius">
-                                <i class="fa fa-search"></i><strong>Find Job</strong>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="banner-counter-box none-768">
-                    <div class="counter-box">
-                        <h1 class="counter">2967</h1>
-                        <p>Jobs Posted</p>
-                    </div>
-                    <div class="counter-box">
-                        <h1 class="counter">167</h1>
-                        <p>Companies</p>
-                    </div>
-                    <div class="counter-box">
-                        <h1 class="counter">150</h1>
-                        <p>Candidates</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
+
+<!-- /input-group -->
 </div>
-<!-- Banner end -->
-<body>
+<!--
+<ul class="nav" id="side-menu">
+    <li>
+        <a href="#"> Entities<span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level" id="entitiesNav">
+        </ul>
+    </li>
+</ul>-->
+</body>
+</html>
+
 
 {% block body %}
 {% endblock%}
-
-
-<!-- Intro end -->
 
 <!-- Footer start -->
 <footer class="footer">
@@ -233,7 +196,7 @@
         <div class="row">
             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                 <div class="footer-item clearfix">
-                    <img src="{{ asset('front/img/logos/logo.png')}}" alt="logo" class="f-logo">
+                    <img src="{{ asset('front/img/logos/logos.png')}}" alt="logo" class="f-logo">
                     <ul class="contact-info">
                         <li>
                             <i class="flaticon-pin"></i>20/F Green Road, Dhanmondi, Dhaka

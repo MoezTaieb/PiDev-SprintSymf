@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
+    {% include 'smalBanner.html.twig' %}
     <h1>Equipment</h1>
 
     <table class="table">
@@ -9,19 +9,23 @@
 
             <tr>
                 <th>Id</th>
-                <td>{{ equipment.id }}</td>
+                <td>{{ equipments.id }}</td>
             </tr>
             <tr>
                 <th>Nomequipment</th>
-                <td>{{ equipment.nomEquipment }}</td>
+                <td>{{ equipments.nomEquipment }}</td>
             </tr>
             <tr>
                 <th>Etatequipment</th>
-                <td>{{ equipment.etatEquipment }}</td>
+                <td>{{ equipments.etatEquipment }}</td>
+            </tr>
+            <tr>
+                <th>quantité</th>
+                <td>{{ equipments.nbEquipment }}</td>
             </tr>
             <tr>
                 <th>Datedonequipment</th>
-                <td>{% if equipment.dateDonEquipment %}{{ equipment.dateDonEquipment|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if equipments.dateDonEquipment %}{{ equipments.dateDonEquipment|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
         </tbody>
     </table>
@@ -29,7 +33,7 @@
     <ul>
 
         <li>
-            <a href="{{ path('equipment_edit', { 'id': equipment.id }) }}">Edit</a>
+            <a href="{{ path('equipment_edit', { 'id': equipments.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

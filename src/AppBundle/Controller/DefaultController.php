@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use DonBundle\Entity\Equipment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,9 +13,14 @@ class DefaultController extends Controller
      * @Route("/front", name="homepagefront")
      */
     public function indexAction()
-    {
-        // replace this example code with whatever you need
-        return $this->render('Default/index.html.twig');
+    {$em = $this->getDoctrine()->getManager();
+
+        $equipment= $this->getDoctrine()->getManager()->getRepository(Equipment::class)->
+        findbyString();
+        $service= $this->getDoctrine()->getManager()->getRepository(Service::class)-> findbySnom() ;
+        return $this->render("Default/index.html.twig",array('equipment'=>$equipment ,
+            'service' =>$service));
+
 
     }
     /**
@@ -22,8 +28,13 @@ class DefaultController extends Controller
      */
     public function indexbackAction()
     {
-        // replace this example code with whatever you need
-        return $this->render('Default/indexback.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $equipment= $this->getDoctrine()->getManager()->getRepository(Equipment::class)->
+        findBy(['etatEquipment'=>'En Cours']);
+
+        return $this->render("baseback.html.twig",array('equipment'=>$equipment));
+
 
     }
 }

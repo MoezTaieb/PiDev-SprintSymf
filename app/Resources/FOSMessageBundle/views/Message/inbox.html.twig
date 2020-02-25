@@ -1,0 +1,22 @@
+{% extends '@FOSMessage/layout.html.twig' %}
+
+{% block fos_message_content %}
+
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+
+<h2>Messages {% trans from 'FOSMessageBundle' %}inbox{% endtrans %}</h2>
+
+<h5> <span  class="badge badge-warning" > <a href="{{ url('fos_message_thread_new' )}}"><i class="flaticon-mail"></i>  {% trans from 'FOSMessageBundle' %} New message{% endtrans %}</a></span>
+  </h5>
+
+{% include '@FOSMessage/Message/threads_list.html.twig' with {'threads': threads} %}
+    </div>
+    <div class="tab-pane fade show " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+    </div>
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+</div>
+    <div class="tab-pane fade show " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+</div>
+
+{% endblock %}

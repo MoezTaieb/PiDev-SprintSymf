@@ -3,7 +3,8 @@
 namespace DonBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use DonBundle\Entity\equipment;
+use DonBundle\Entity\Equipment;
+use DonBundle\Entity\CategorieEquipment;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query;
 /**
@@ -15,16 +16,29 @@ use Doctrine\ORM\Query;
 class EquipmentRepository extends \Doctrine\ORM\EntityRepository
 {
 
-    public function findEntitiebyString($str){
-        return $this->getEntityManager()
-            ->createQuery(
-                'SELECT q
-                FROM DonBundle:equipment q
-                WHERE q.nomEquipment
-                LIKE :str'
-            )
-            ->setParameter('str', '%'.$str.'%')
-            ->getResult();
-    }
+public function findString()
+{  return $this->getEntityManager()
+    ->createQuery(
+        'SELECT p
+                FROM DonBundle:Equipment p
+                WHERE p.etatEquipment LIKE :str'
+    )
+    ->setParameter('str', '%'."En cours".'%')
+    ->getResult();
 
 }
+
+    public function findbyString()
+    {  return $this->getEntityManager()
+        ->createQuery(
+            'SELECT sum(p.nbEquipment) as nb ,count(p.nomEquipment) as nb1 , count(p.categorieEquipment) as nb2
+                FROM DonBundle:Equipment p
+                '
+        )
+      //  ->setParameter('str', '%'."En cours".'%')
+        ->getResult();
+
+    }
+}
+
+

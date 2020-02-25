@@ -26,3 +26,7 @@ equipment_imp:
     path:     /imp
     defaults: { _controller: "DonBundle:Equipment:imp" }
     methods:  GET
+equipment_stat:
+    path:     /stat
+    defaults: { _controller: "DonBundle:Equipment:stat" }
+    methods:  GET

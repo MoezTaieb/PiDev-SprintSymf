@@ -16,15 +16,20 @@ class CategorieServiceController extends Controller
      * Lists all categorieService entities.
      *
      */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
+    public function indexAction(Request $request)
+    { $em = $this->getDoctrine()->getManager();
 
         $categorieServices = $em->getRepository('DonBundle:CategorieService')->findAll();
 
-        return $this->render('categorieservice/index.html.twig', array(
-            'categorieServices' => $categorieServices,
-        ));
+        $pagination  = $this->get('knp_paginator')->paginate(
+            $categorieServices,
+            $request->query->get('page', 1)/*le numéro de la page à afficher*/,
+            4/*nbre d'éléments par page*/  );
+        return $this->render('categorieservice/index.html.twig', array("categorieServices"=>$pagination));
+
+
+
+
     }
 
     /**

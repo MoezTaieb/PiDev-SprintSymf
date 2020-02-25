@@ -1,8 +1,11 @@
 <?php
 
 namespace CampBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Camp
@@ -25,6 +28,7 @@ class Camp
     /**
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\User" , inversedBy="camp")
      * @ORM\JoinColumn(name="responsable_id",referencedColumnName="id")
+     * @Assert\NotBlank(message="Définir le nombre refugier")
      */
     private $responsable ;
 
@@ -44,6 +48,17 @@ class Camp
         $this->responsable = $responsable;
     }
 
+    /**
+     * toString
+     * @return string
+     */
+    public function __toString()
+
+    {
+
+                return $this->getNomCamp();
+
+    }
 
 
     /**
@@ -81,7 +96,7 @@ class Camp
 
     public function __construct()
     {
-        $this->refugies=new ArrayCollection();
+       $this->refugies=new ArrayCollection();
         $this->affectations=new ArrayCollection();
         $this->demandes=new ArrayCollection();
 
@@ -128,6 +143,7 @@ class Camp
      * @var string
      *
      * @ORM\Column(name="nomCamp", type="string", length=255)
+     * @Assert\NotBlank(message="Définir le nom")
      */
     private $nomCamp;
 
@@ -135,8 +151,35 @@ class Camp
      * @var string
      *
      * @ORM\Column(name="adresseCamp", type="string", length=255)
+     * @Assert\NotBlank(message="Définir l'adresse")
      */
     private $adresseCamp;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nbrefugier", type="integer")
+     * @Assert\NotBlank(message="Définir le nombre refugier")
+     * @Assert\GreaterThan(value = 0, message="le nombre refugier doit étre non null" )
+     */
+    private $nbrefugier;
+
+    /**
+     * @return int
+     */
+    public function getNbrefugier()
+    {
+        return $this->nbrefugier;
+    }
+
+    /**
+     * @param int $nbrefugier
+     */
+    public function setNbrefugier($nbrefugier)
+    {
+        $this->nbrefugier = $nbrefugier;
+    }
 
 
     /**

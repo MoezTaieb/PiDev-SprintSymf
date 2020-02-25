@@ -1,0 +1,36 @@
+camp_index:
+    path:     /
+    defaults: { _controller: "CampBundle:Camp:index" }
+    methods:  GET
+
+camp_show:
+    path:     /{id}/show
+    defaults: { _controller: "CampBundle:Camp:show" }
+    methods:  GET
+
+camp_new:
+    path:     /new
+    defaults: { _controller: "CampBundle:Camp:new" }
+    methods:  [GET, POST]
+
+camp_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "CampBundle:Camp:edit" }
+    methods:  [GET, POST]
+
+camp_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "CampBundle:Camp:delete" }
+    methods:  DELETE
+camp_pdf2:
+    path:     /pdf2
+    defaults: { _controller: "CampBundle:Camp:pdf2" }
+    methods:  GET
+ajax_search2:
+    path:     /search2
+    defaults: { _controller: "CampBundle:Camp:search2" }
+    methods:  GET
+camp_stat:
+    path:     /stat
+    defaults: { _controller: "CampBundle:Camp:stat" }
+    methods:  GET

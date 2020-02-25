@@ -4,6 +4,7 @@ namespace EventBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Evenement
@@ -23,12 +24,12 @@ class Evenement
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Invite" , mappedBy="evenement")
+     * @ORM\OneToMany(targetEntity="Invite" , mappedBy="evenement" )
      */
     private $invites ;
 
     /**
-     * @ORM\OneToMany(targetEntity="Participation" , mappedBy="evenement")
+     * @ORM\OneToMany(targetEntity="Participation" , mappedBy="evenement" )
      */
     private $participations ;
 
@@ -72,7 +73,8 @@ class Evenement
 
     public function __construct()
     {
-        $this->invites=new ArrayCollection();
+        /** $this->invites=new ArrayCollection();**/
+
         $this->participations=new ArrayCollection();
         $this->equipments=new ArrayCollection();
 
@@ -98,6 +100,7 @@ class Evenement
      * @var string
      *
      * @ORM\Column(name="nomEvenement", type="string", length=255)
+     * @Assert\NotBlank(message="Nom obligatoire")
      */
     private $nomEvenement;
 
@@ -105,6 +108,7 @@ class Evenement
      * @var string
      *
      * @ORM\Column(name="lieuEvenement", type="string", length=255)
+     * @Assert\NotBlank(message="Lieu obligatoire")
      */
     private $lieuEvenement;
 
@@ -112,6 +116,7 @@ class Evenement
      * @var \DateTime
      *
      * @ORM\Column(name="dateEvenement", type="datetime")
+     *
      */
     private $dateEvenement;
 
@@ -119,9 +124,19 @@ class Evenement
      * @var int
      *
      * @ORM\Column(name="nombreMaxParticipant", type="integer")
+     * @Assert\NotBlank(message="Définir un nombre maximal")
+     * @Assert\GreaterThan(value = 10, message = "Minimum du nombre maximal est 10")
      */
     private $nombreMaxParticipant;
 
+
+    /**
+     * @var string
+     * @Assert\NotBlank(message="entrer une image")
+     * @Assert\Image()
+     * @ORM\Column(name="image", type="string", length=255,nullable=true)
+     */
+    private $image;
 
     /**
      * Get id
@@ -228,5 +243,26 @@ class Evenement
     {
         return $this->nombreMaxParticipant;
     }
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    public function __toString() {
+        return $this->getNomEvenement();
+    }
+
 }
 

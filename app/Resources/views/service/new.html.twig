@@ -1,16 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+{% include 'smalBanner.html.twig' %}
 <div class="container">
     <h1>donation service </h1>
     <div class="form-group">
         {% if is_granted("IS_AUTHENTICATED_FULLY") %}
             {{ form_start(form) }}
             {{ form_widget(form) }}
-            <input type="submit" value="Create" />
+            <input type="submit" value="Create"  onclick="affichera()"  />
             {{ form_end(form) }}
 
-            <ul>
+
+        <ul>
                 <li>
                     <a href="{{ path('service_index') }}">Back to the list</a>
                 </li>
@@ -20,5 +22,10 @@
                 <a href="{{ path('fos_user_security_login') }}">
             </h1>
         {%endif%}
+
+
+
+
+
 
 {% endblock %}

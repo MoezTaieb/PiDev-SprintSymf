@@ -131,6 +131,29 @@ class Equipment
      * @ORM\Column(name="etatEquipment", type="string", length=255)
      */
     private $etatEquipment;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nbEquipment", type="integer")
+     */
+    private $nbEquipment;
+
+    /**
+     * @return int
+     */
+    public function getNbEquipment()
+    {
+        return $this->nbEquipment;
+    }
+
+    /**
+     * @param int $nbEquipment
+     */
+    public function setNbEquipment($nbEquipment)
+    {
+        $this->nbEquipment = $nbEquipment;
+    }
+
 
     /**
      * @var \DateTime

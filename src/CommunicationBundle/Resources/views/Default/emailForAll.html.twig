@@ -1,0 +1,52 @@
+{% extends 'basee.html.twig' %}
+
+{% block body %}
+
+    <div class="dashboard-list">
+        <h3 class="heading">Send email for all users</h3>
+        <div class="dashboard-message contact-2 bdr clearfix">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-3">
+                    <!-- Edit profile photo -->
+                    {{ form_start(form) }}
+
+                </div>
+                <div class="col-lg-9 col-md-9">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group name">
+                                {{ form_label(form.name, "email name") }}
+                                {{  form_widget(form.name ,{'attr': {'class': 'form-control'}}) }}
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group mb-0 message">
+                                {{  form_label(form.message, "message") }}
+                                {{  form_widget(form.message ,{'attr': {'class': 'form-control'}}) }}
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group name">
+
+                            </div>
+                        </div>
+                        {{  form_widget(form.send ,{'attr': {'class': 'btn btn-md button-theme'}}) }}
+                    </div>
+
+
+                    {{ form_end(form) }}
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock%}
+

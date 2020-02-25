@@ -1,0 +1,64 @@
+{% extends 'basee.html.twig' %}
+{% block body %}
+    <h3 class="title1">List of events</h3>
+    <div class="grid-bottom widget-shadow">
+
+        <form action="{{ path("AjoutE") }}">
+
+            <input type="submit" class="btn btn-primary btn-flat btn-pri btn-lg" value="Ajouter un Evenement" />
+
+        </form>
+
+        <table class="table table-bordered table-striped no-margin grd_tble">
+
+            <thead>
+            <tr>
+
+                <th>
+                    Nom Invités
+                </th>
+
+                <th>
+                    Prenom Invités
+                </th>
+
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in inv %}
+                <tr>
+                    <th>{{ i.nomInvite }}</th>
+
+
+
+                    <th>{{i.prenomInvite}}</th>
+
+
+
+
+
+
+                    <form action="{{ path("ModifierInvi",{'id' : i.id}) }}">
+                        <th><input type="submit" class="btn btn-info" value="modifier inivité"/></th>
+                    </form>
+                    <th>
+                        <form action="{{ path("SuppInvi",{'id' : i.id}) }}">
+
+                            <input type="submit" class="btn btn-danger" value="Supprimer cet invité" onclick="return confirm('are u sure?')"/>
+
+                        </form> </th>
+
+
+
+
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}
