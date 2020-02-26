@@ -38,3 +38,11 @@ mail:
     path:     /mailing
     defaults: { _controller: EventBundle:Default:mail }
 
+myevent:
+    path:     /myevent
+    defaults: { _controller: EventBundle:Default:myevents }
+
+AnnulerEvent:
+    path:     /annuler/{id}
+    defaults: { _controller: EventBundle:Default:annulerevent }
+

@@ -38,7 +38,7 @@ class Participation
 
     /**
      * @ORM\ManyToOne(targetEntity="Evenement" , inversedBy="participations")
-     * @ORM\JoinColumn(name="evenement_id",referencedColumnName="id")
+     * @ORM\JoinColumn(name="evenement_id",referencedColumnName="id" , onDelete="CASCADE")
      */
     private $evenement ;
 

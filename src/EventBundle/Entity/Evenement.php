@@ -24,12 +24,12 @@ class Evenement
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Invite" , mappedBy="evenement")
+     * @ORM\OneToMany(targetEntity="Invite" , mappedBy="evenement" )
      */
     private $invites ;
 
     /**
-     * @ORM\OneToMany(targetEntity="Participation" , mappedBy="evenement")
+     * @ORM\OneToMany(targetEntity="Participation" , mappedBy="evenement" )
      */
     private $participations ;
 
@@ -37,6 +37,58 @@ class Evenement
      * @ORM\OneToMany(targetEntity="DonBundle\Entity\Equipment" , mappedBy="evenement")
      */
     private $equipments ;
+
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nomEvenement", type="string", length=255)
+     * @Assert\NotBlank(message="Nom obligatoire")
+     */
+    private $nomEvenement;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lieuEvenement", type="string", length=255)
+     * @Assert\NotBlank(message="Lieu obligatoire")
+     */
+    private $lieuEvenement;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateEvenement", type="datetime")
+     *
+     */
+    private $dateEvenement;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nombreMaxParticipant", type="integer")
+     * @Assert\NotBlank(message="Définir un nombre maximal")
+     * @Assert\GreaterThan(value = 10, message = "Minimum du nombre maximal est 10")
+     */
+    private $nombreMaxParticipant;
+
+
+    /**
+     * @var string
+     * @Assert\NotBlank(message="entrer une image")
+     * @Assert\Image()
+     * @ORM\Column(name="image", type="string", length=255,nullable=true)
+     */
+    private $image;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Produit" )
+     * @ORM\JoinColumn(name="id_produit",referencedColumnName="id")
+     */
+    private $produit;
+
+
 
     /**
      * @return ArrayCollection
@@ -95,43 +147,6 @@ class Evenement
     {
         $this->invites = $invites;
     }
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nomEvenement", type="string", length=255)
-     */
-    private $nomEvenement;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="lieuEvenement", type="string", length=255)
-     */
-    private $lieuEvenement;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="dateEvenement", type="datetime")
-     */
-    private $dateEvenement;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nombreMaxParticipant", type="integer")
-     */
-    private $nombreMaxParticipant;
-
-
-    /**
-     * @var string
-     * @Assert\NotBlank(message="entrer une image")
-     * @Assert\Image()
-     * @ORM\Column(name="image", type="string", length=255,nullable=true)
-     */
-    private $image;
 
     /**
      * Get id
@@ -257,6 +272,22 @@ class Evenement
 
     public function __toString() {
         return $this->getNomEvenement();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProduit()
+    {
+        return $this->produit;
+    }
+
+    /**
+     * @param mixed $produit
+     */
+    public function setProduit($produit)
+    {
+        $this->produit = $produit;
     }
 
 }

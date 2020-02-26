@@ -4,7 +4,12 @@
     <div class="form-body" data-example-id="simple-form-inline">
 
 
-        <h2 class="title1">{{ form(form) }}</h2>
+        <h2 class="title1">
+            {{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+
+        </h2>
         <div class="form-group" >
 
         </div>

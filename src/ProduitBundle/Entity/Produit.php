@@ -176,5 +176,11 @@ class Produit
     {
         return $this->descriptionProduit;
     }
+
+    public function __toString()
+    {
+        return $this->nomProduit;
+    }
+
 }
 

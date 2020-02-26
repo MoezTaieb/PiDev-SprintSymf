@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <table class="table table-bordered table-striped no-margin grd_tble">
+
+        <thead>
+        <tr>
+
+            <th>
+                Nom evenements
+            </th>
+
+            <th>
+                Lieu evenements
+            </th>
+            <th>
+                Date evenements
+            </th>
+            <th>
+                Nombre Max Participant
+            </th>
+            <th> Affiche de l'evenement </th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for e in event %}
+            <tr>
+                <th>{{ e.evenement.nomEvenement }}</th>
+
+
+                <th>{{e.evenement.lieuEvenement}}</th>
+
+
+                <th>{{ e.evenement.dateEvenement |date('Y-m-d') }}</th>
+
+
+                <th>{{e.evenement.nombreMaxParticipant}}</th>
+                <th> <img src="{{ asset('uploads/images/') ~ e.evenement.image }}" width="80" height="80"></th>
+
+                <form action="{{ path("AnnulerEvent",{'id' : e.id}) }}">
+                    <th><input type="submit" class="btn btn-info" value="Annuler Participation" onclick="return confirm('are u sure?')"/></th>
+                </form>
+
+
+
+
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

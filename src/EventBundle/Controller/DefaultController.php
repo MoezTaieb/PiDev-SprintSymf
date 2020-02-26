@@ -202,6 +202,26 @@ class DefaultController extends Controller
 return $this->render('@Event\Default\mail.html.twig');
 
     }
+    public function myeventsAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user=$this->getUser();
+        $user=$this->container->get('security.token_storage')->getToken()->getUser();
+        $partid = $em->getRepository('EventBundle:Participation')->getPartById($user->getId());
+
+        return $this->render('@Event/Default/myevent.html.twig',array('event'=>$partid));
+    }
+
+    public function  annulereventAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $sup = $em->getRepository('EventBundle:Participation')->find($id);
+        $em->remove($sup);
+        $em->flush();
+
+        return $this->redirectToRoute("myevent");
+    }
+
 
 
 
